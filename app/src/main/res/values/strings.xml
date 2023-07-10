@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyStoryApp</string>
+    <string name="welcome_title">Welcome to My Story App</string>
 </resources>
