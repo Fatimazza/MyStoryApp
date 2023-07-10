@@ -3,4 +3,7 @@
     <string name="welcome_title">Welcome to My Story App</string>
     <string name="welcome_login">Login</string>
     <string name="welcome_sign_up">Sign Up</string>
+    <string name="auth_name">Name</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
 </resources>
