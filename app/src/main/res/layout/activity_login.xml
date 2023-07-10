@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/loginGuidelineHorizontal" />
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/loginEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginTextView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailEditTextLayout"
+        android:id="@+id/loginEmailEditTextLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextView"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailTextView"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -54,7 +54,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/passwordTextView"
+        android:id="@+id/loginPasswordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -62,10 +62,10 @@
         android:text="@string/auth_password"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailEditTextLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordEditTextLayout"
+        android:id="@+id/loginPasswordEditTextLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordTextView"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -97,7 +97,7 @@
         android:text="@string/auth_log_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordEditTextLayout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/loginGuidelineHorizontal"
