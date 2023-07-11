@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import xyz.codingwithza.mystoryapp.R
 
-class MyEditText : AppCompatEditText {
+class PasswordEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
