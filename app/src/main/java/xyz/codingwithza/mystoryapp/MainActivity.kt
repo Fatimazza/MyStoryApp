@@ -4,10 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import xyz.codingwithza.mystoryapp.databinding.ActivityMainBinding
+import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.login.LoginActivity
 import xyz.codingwithza.mystoryapp.view.register.RegisterActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Util {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupAction()
+        setupFullScreenView(window, supportActionBar)
     }
 
     private fun setupAction() {
