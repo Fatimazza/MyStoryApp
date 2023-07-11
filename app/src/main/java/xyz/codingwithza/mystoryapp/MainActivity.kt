@@ -1,7 +1,10 @@
 package xyz.codingwithza.mystoryapp
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import xyz.codingwithza.mystoryapp.databinding.ActivityMainBinding
 import xyz.codingwithza.mystoryapp.util.Util
@@ -19,6 +22,24 @@ class MainActivity : AppCompatActivity(), Util {
 
         setupAction()
         setupFullScreenView(window, supportActionBar)
+        playAnimation()
+    }
+
+    private fun playAnimation(){
+        val title = ObjectAnimator.ofFloat(binding.welcomeTextView, View.ALPHA, 1f).apply {
+            duration = 500
+            startDelay = 500
+        }
+        val login = ObjectAnimator.ofFloat(binding.welcomeLoginButton, View.ALPHA, 1f).setDuration(500)
+        val signup = ObjectAnimator.ofFloat(binding.welcomeSignupButton, View.ALPHA, 1f).setDuration(500)
+
+        val together = AnimatorSet().apply {
+            playTogether(login, signup)
+        }
+        AnimatorSet().apply {
+            playSequentially(title, together)
+            start()
+        }
     }
 
     private fun setupAction() {
