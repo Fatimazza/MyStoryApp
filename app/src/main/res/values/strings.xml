@@ -6,4 +6,5 @@
     <string name="auth_name">Name</string>
     <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
+    <string name="auth_pass_error">Password tidak boleh kurang dari 8 karakter</string>
 </resources>

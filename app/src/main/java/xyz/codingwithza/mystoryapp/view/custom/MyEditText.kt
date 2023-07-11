@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import xyz.codingwithza.mystoryapp.R
 
 class MyEditText : AppCompatEditText {
 
@@ -24,6 +25,11 @@ class MyEditText : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().length < 8) {
+                    setError(context.getString(R.string.auth_pass_error), null)
+                } else {
+                    error = null
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
