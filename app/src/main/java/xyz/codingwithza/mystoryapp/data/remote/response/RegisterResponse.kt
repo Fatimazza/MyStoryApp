@@ -1,4 +1,4 @@
-package xyz.codingwithza.mystoryapp.model
+package xyz.codingwithza.mystoryapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
