@@ -1,4 +1,4 @@
-package xyz.codingwithza.mystoryapp.network
+package xyz.codingwithza.mystoryapp.data.remote.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

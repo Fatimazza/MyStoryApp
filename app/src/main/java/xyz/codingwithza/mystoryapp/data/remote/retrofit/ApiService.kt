@@ -1,4 +1,4 @@
-package xyz.codingwithza.mystoryapp.network
+package xyz.codingwithza.mystoryapp.data.remote.retrofit
 
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
