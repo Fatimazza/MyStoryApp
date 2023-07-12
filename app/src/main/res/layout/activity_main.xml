@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/tvWelcomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -16,13 +16,13 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintBottom_toTopOf="@+id/glWelcomeHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:alpha="1" />
 
     <Button
-        android:id="@+id/welcomeLoginButton"
+        android:id="@+id/btnWelcomeLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -31,13 +31,13 @@
         android:alpha="0"
         android:backgroundTint="@color/black"
         android:text="@string/auth_log_in"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintEnd_toStartOf="@+id/glWelcomeVertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeTitle"
         tools:alpha="1" />
 
     <Button
-        android:id="@+id/welcomeSignupButton"
+        android:id="@+id/btnWelcomeSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -47,12 +47,12 @@
         android:backgroundTint="@color/black"
         android:text="@string/auth_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
+        app:layout_constraintStart_toStartOf="@+id/glWelcomeVertical"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeTitle"
         tools:alpha="1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
+        android:id="@+id/glWelcomeHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVertical"
+        android:id="@+id/glWelcomeVertical"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="vertical"

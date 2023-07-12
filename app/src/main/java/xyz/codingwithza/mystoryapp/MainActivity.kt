@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity(), Util {
     }
 
     private fun playAnimation(){
-        val title = ObjectAnimator.ofFloat(binding.welcomeTextView, View.ALPHA, 1f).apply {
+        val title = ObjectAnimator.ofFloat(binding.tvWelcomeTitle, View.ALPHA, 1f).apply {
             duration = 500
             startDelay = 500
         }
-        val login = ObjectAnimator.ofFloat(binding.welcomeLoginButton, View.ALPHA, 1f).setDuration(500)
-        val signup = ObjectAnimator.ofFloat(binding.welcomeSignupButton, View.ALPHA, 1f).setDuration(500)
+        val login = ObjectAnimator.ofFloat(binding.btnWelcomeLogin, View.ALPHA, 1f).setDuration(500)
+        val signup = ObjectAnimator.ofFloat(binding.btnWelcomeSignup, View.ALPHA, 1f).setDuration(500)
 
         val together = AnimatorSet().apply {
             playTogether(login, signup)
@@ -43,10 +43,10 @@ class MainActivity : AppCompatActivity(), Util {
     }
 
     private fun setupAction() {
-        binding.welcomeLoginButton.setOnClickListener {
+        binding.btnWelcomeLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        binding.welcomeSignupButton.setOnClickListener {
+        binding.btnWelcomeSignup.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
