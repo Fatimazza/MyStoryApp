@@ -7,7 +7,7 @@
     tools:context=".view.register.RegisterActivity">
 
     <TextView
-        android:id="@+id/regSignUpTextView"
+        android:id="@+id/tvRegisterSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,10 +20,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/regGuidelineHorizontal" />
+        app:layout_constraintBottom_toTopOf="@+id/glRegisterHorizontal" />
 
     <TextView
-        android:id="@+id/regNameTextView"
+        android:id="@+id/tvRegisterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -31,10 +31,10 @@
         android:text="@string/auth_name"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regSignUpTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterSignup" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/regNameEditTextLayout"
+        android:id="@+id/etRegisterNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,11 +42,11 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterName"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/regNameEditText"
+            android:id="@+id/etRegisterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -55,7 +55,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/regEmailTextView"
+        android:id="@+id/tvRegisterEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -63,10 +63,10 @@
         android:text="@string/auth_email"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regNameEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterNameLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/regEmailEditTextLayout"
+        android:id="@+id/etRegisterEmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,11 +74,11 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regEmailTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterEmail"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/regEmailEditText"
+            android:id="@+id/etRegisterEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -86,7 +86,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/regPasswordTextView"
+        android:id="@+id/tvRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -94,10 +94,10 @@
         android:text="@string/auth_password"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regEmailEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterEmailLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/regPasswordEditTextLayout"
+        android:id="@+id/etRegisterPasswordLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,12 +105,12 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regPasswordTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterPassword"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <xyz.codingwithza.mystoryapp.view.custom.PasswordEditText
-            android:id="@+id/regPasswordEditText"
+            android:id="@+id/etRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -119,7 +119,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/regSignupButton"
+        android:id="@+id/btnRegisterSignup"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
@@ -129,10 +129,10 @@
         android:text="@string/auth_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regPasswordEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPasswordLayout" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/regGuidelineHorizontal"
+        android:id="@+id/glRegisterHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
@@ -141,7 +141,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/regGuidelineVertical"
+        android:id="@+id/glRegisterVertical"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="vertical"
