@@ -7,7 +7,7 @@
     tools:context=".view.login.LoginActivity">
 
     <TextView
-        android:id="@+id/loginTextView"
+        android:id="@+id/tvLoginTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,10 +20,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/loginGuidelineHorizontal" />
+        app:layout_constraintBottom_toTopOf="@+id/glLoginHorizontal" />
 
     <TextView
-        android:id="@+id/loginEmailTextView"
+        android:id="@+id/tvLoginEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -31,10 +31,10 @@
         android:text="@string/auth_email"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmailEditTextLayout"
+        android:id="@+id/etLoginEmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,11 +42,11 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmailTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginEmail"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginEmailEditText"
+            android:id="@+id/etLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -54,7 +54,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/loginPasswordTextView"
+        android:id="@+id/tvLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -62,10 +62,10 @@
         android:text="@string/auth_password"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmailEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etLoginEmailLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginPasswordEditTextLayout"
+        android:id="@+id/etLoginPasswordLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,12 +73,12 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginPassword"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <xyz.codingwithza.mystoryapp.view.custom.PasswordEditText
-            android:id="@+id/loginPasswordEditText"
+            android:id="@+id/etLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -87,7 +87,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/btnLoginLogin"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
@@ -97,10 +97,10 @@
         android:text="@string/auth_log_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordEditTextLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/etLoginPasswordLayout" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/loginGuidelineHorizontal"
+        android:id="@+id/glLoginHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/loginGuidelineVertical"
+        android:id="@+id/glLoginVertical"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="vertical"
