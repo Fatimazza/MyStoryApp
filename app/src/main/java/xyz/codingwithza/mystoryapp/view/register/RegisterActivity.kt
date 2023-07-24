@@ -1,6 +1,7 @@
 package xyz.codingwithza.mystoryapp.view.register
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -47,6 +48,7 @@ class RegisterActivity : AppCompatActivity(), Util {
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        showLoading(true)
                         Toast.makeText(
                             this,
                             "~ Loading ~",
@@ -54,6 +56,7 @@ class RegisterActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
+                        showLoading(false)
                         Toast.makeText(
                             this,
                             "Regis SUCCESS " + result.data.message.toString(),
@@ -61,6 +64,7 @@ class RegisterActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Error -> {
+                        showLoading(false)
                         Toast.makeText(
                             this,
                             "Regis ERROR " + result.error,
@@ -68,6 +72,22 @@ class RegisterActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                 }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            etRegisterName.isEnabled = !isLoading
+            etRegisterEmail.isEnabled = !isLoading
+            etRegisterPassword.isEnabled = !isLoading
+
+            if (isLoading) {
+                btnRegisterSignup.visibility = View.GONE
+                pbRegister.visibility = View.VISIBLE
+            } else {
+                btnRegisterSignup.visibility = View.VISIBLE
+                pbRegister.visibility = View.GONE
             }
         }
     }
