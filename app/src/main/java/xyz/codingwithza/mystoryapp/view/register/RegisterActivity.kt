@@ -3,6 +3,7 @@ package xyz.codingwithza.mystoryapp.view.register
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -29,7 +30,17 @@ class RegisterActivity : AppCompatActivity(), Util {
 
     private fun setupButtonAction() {
         binding.btnRegisterSignup.setOnClickListener {
-
+            registerUser(
+                RegisterRequest(
+                    binding.etRegisterName.text.toString(),
+                    binding.etRegisterEmail.text.toString(),
+                    binding.etRegisterPassword.text.toString()
+                )
+            )
         }
+    }
+
+    private fun registerUser(registerRequest: RegisterRequest) {
+
     }
 }
