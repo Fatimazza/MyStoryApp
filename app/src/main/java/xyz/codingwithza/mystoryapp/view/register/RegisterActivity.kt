@@ -19,10 +19,17 @@ class RegisterActivity : AppCompatActivity(), Util {
 
         setupFullScreenView(window, supportActionBar)
         initViewModel()
+        setupButtonAction()
     }
 
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance()
         registerViewModel = ViewModelProvider(this, factory)[RegisterViewModel::class.java]
+    }
+
+    private fun setupButtonAction() {
+        binding.btnRegisterSignup.setOnClickListener {
+
+        }
     }
 }
