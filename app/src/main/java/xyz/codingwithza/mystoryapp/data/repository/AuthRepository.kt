@@ -2,11 +2,13 @@ package xyz.codingwithza.mystoryapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
+import xyz.codingwithza.mystoryapp.data.remote.response.ErrorResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.RegisterResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
@@ -30,6 +32,12 @@ class AuthRepository private constructor(
                         response.body()?.let {
                             result.value = Result.Success(it)
                         }
+                    } else {
+                        val errorBody = Gson().fromJson(
+                            response.errorBody()?.charStream(),
+                            ErrorResponse::class.java
+                        )
+                        result.value = Result.Error(errorBody.message.toString())
                     }
                 }
 
