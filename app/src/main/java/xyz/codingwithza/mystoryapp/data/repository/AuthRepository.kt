@@ -2,7 +2,9 @@ package xyz.codingwithza.mystoryapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.data.remote.response.RegisterResponse
@@ -19,7 +21,18 @@ class AuthRepository private constructor(
         result.value = Result.Loading
         val client = apiService.register(registerRequest.name, registerRequest.email, registerRequest.password)
         client
-            .enqueue(object : Callback<RegisterResponse> {})
+            .enqueue(object : Callback<RegisterResponse> {
+                override fun onResponse(
+                    call: Call<RegisterResponse>,
+                    response: Response<RegisterResponse>
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
         return result
     }
 
