@@ -4,10 +4,10 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
+import com.google.android.material.textfield.TextInputEditText
 import xyz.codingwithza.mystoryapp.R
 
-class PasswordEditText : AppCompatEditText {
+class PasswordEditText : TextInputEditText {
 
     constructor(context: Context) : super(context) {
         init()
