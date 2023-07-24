@@ -1,12 +1,14 @@
 package xyz.codingwithza.mystoryapp.view.register
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+import xyz.codingwithza.mystoryapp.data.remote.Result
 
 class RegisterActivity : AppCompatActivity(), Util {
 
@@ -41,6 +43,32 @@ class RegisterActivity : AppCompatActivity(), Util {
     }
 
     private fun registerUser(registerRequest: RegisterRequest) {
-
+        registerViewModel.registerUser(registerRequest).observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        Toast.makeText(
+                            this,
+                            "~ Loading ~",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this,
+                            "Regis SUCCESS " + result.data.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this,
+                            "Regis ERROR " + result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
     }
 }
