@@ -19,11 +19,11 @@ class AuthRepository private constructor(
     private val apiService: ApiService
 ) {
 
-    private val result = MediatorLiveData<Result<RegisterResponse>>()
+    private val registrationResult = MediatorLiveData<Result<RegisterResponse>>()
     private val loginResult = MediatorLiveData<Result<LoginResponse>>()
 
     fun registerUser(registerRequest: RegisterRequest): LiveData<Result<RegisterResponse>> {
-        result.value = Result.Loading
+        registrationResult.value = Result.Loading
         val client = apiService.register(registerRequest.name, registerRequest.email, registerRequest.password)
         client
             .enqueue(object : Callback<RegisterResponse> {
@@ -33,22 +33,22 @@ class AuthRepository private constructor(
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            result.value = Result.Success(it)
+                            registrationResult.value = Result.Success(it)
                         }
                     } else {
                         val errorBody = Gson().fromJson(
                             response.errorBody()?.charStream(),
                             ErrorResponse::class.java
                         )
-                        result.value = Result.Error(errorBody.message.toString())
+                        registrationResult.value = Result.Error(errorBody.message.toString())
                     }
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    result.value = Result.Error(t.message.toString())
+                    registrationResult.value = Result.Error(t.message.toString())
                 }
             })
-        return result
+        return registrationResult
     }
 
     fun loginUser(loginRequest: LoginRequest): LiveData<Result<LoginResponse>> {
