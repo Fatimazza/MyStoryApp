@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvLoginEmail"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <xyz.codingwithza.mystoryapp.view.custom.EmailEditText
             android:id="@+id/etLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
