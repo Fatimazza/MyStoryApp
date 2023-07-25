@@ -35,12 +35,30 @@ class LoginActivity : AppCompatActivity(), Util {
         val etLoginEmail = binding.etLoginEmail.text
         val etLoginPass = binding.etLoginEmail.text
         binding.btnLoginLogin.setOnClickListener {
-            loginUser(
-                LoginRequest(
-                    etLoginEmail.toString(),
-                    etLoginPass.toString()
+
+            if (etLoginEmail.isNullOrEmpty()
+                || etLoginPass.isNullOrEmpty()
+            ) {
+                Toast.makeText(
+                    this,
+                    "Name, Email, and Password cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (binding.etLoginEmail.error != null
+                || binding.etLoginPassword.error != null) {
+                Toast.makeText(
+                    this,
+                    "One or more input is not valid",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                loginUser(
+                    LoginRequest(
+                        etLoginEmail.toString(),
+                        etLoginPass.toString()
+                    )
                 )
-            )
+            }
         }
     }
 
