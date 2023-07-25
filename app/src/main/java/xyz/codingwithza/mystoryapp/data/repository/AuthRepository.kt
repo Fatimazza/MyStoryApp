@@ -7,8 +7,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.codingwithza.mystoryapp.data.remote.Result
+import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.data.remote.response.ErrorResponse
+import xyz.codingwithza.mystoryapp.data.remote.response.LoginResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.RegisterResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
@@ -18,6 +20,7 @@ class AuthRepository private constructor(
 ) {
 
     private val result = MediatorLiveData<Result<RegisterResponse>>()
+    private val loginResult = MediatorLiveData<Result<LoginResponse>>()
 
     fun registerUser(registerRequest: RegisterRequest): LiveData<Result<RegisterResponse>> {
         result.value = Result.Loading
@@ -48,6 +51,14 @@ class AuthRepository private constructor(
         return result
     }
 
+    fun loginUser(loginRequest: LoginRequest): LiveData<Result<LoginResponse>> {
+        loginResult.value = Result.Loading
+        val client = apiService.login(loginRequest.email, loginRequest.password)
+        client
+            .enqueue(object : Callback<LoginResponse> {})
+        return loginResult
+    }
+    
     companion object {
         @Volatile
         private var instance: AuthRepository? = null
