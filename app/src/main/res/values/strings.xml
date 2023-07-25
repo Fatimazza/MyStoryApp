@@ -9,6 +9,9 @@
     <string name="auth_pass_error">Password can\'t be less than 8 characters</string>
     <string name="auth_error">One or more input(s) is not valid</string>
     <string name="auth_blank">Name, Email, and Password cannot be empty</string>
+    <string name="auth_blank_login">Name and Password cannot be empty</string>
     <string name="login_error">"Login Error: "</string>
     <string name="login_success">"Login Success: "</string>
+    <string name="register_error">"Register Error: "</string>
+    <string name="register_success">"Register Success: "</string>
 </resources>

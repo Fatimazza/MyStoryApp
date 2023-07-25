@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
@@ -40,18 +42,18 @@ class RegisterActivity : AppCompatActivity(), Util {
                 || etRegEmail.isNullOrEmpty()
                 || etRegPass.isNullOrEmpty()
             ) {
-                Toast.makeText(
-                    this,
-                    "Name, Email, and Password cannot be empty",
-                    Toast.LENGTH_SHORT
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.auth_blank),
+                    Snackbar.LENGTH_SHORT
                 ).show()
             } else if (binding.etRegisterPassword.error != null
                 || binding.etRegisterEmail.error != null
             ) {
-                Toast.makeText(
-                    this,
-                    "One or more input is not valid",
-                    Toast.LENGTH_SHORT
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.auth_error),
+                    Snackbar.LENGTH_SHORT
                 ).show()
             } else {
                 registerUser(
@@ -78,20 +80,20 @@ class RegisterActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
-                        showLoading(false)
-                        Toast.makeText(
-                            this,
-                            "Regis SUCCESS " + result.data.message.toString(),
-                            Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.register_success) + result.data.message.toString(),
+                            Snackbar.LENGTH_SHORT
                         ).show()
+                        showLoading(false)
                     }
                     is Result.Error -> {
-                        showLoading(false)
-                        Toast.makeText(
-                            this,
-                            "Regis ERROR " + result.error,
-                            Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.register_error) + result.error,
+                            Snackbar.LENGTH_SHORT
                         ).show()
+                        showLoading(false)
                     }
                 }
             }
