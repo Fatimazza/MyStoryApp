@@ -3,6 +3,7 @@ package xyz.codingwithza.mystoryapp.view.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -28,8 +29,19 @@ class LoginActivity : AppCompatActivity(), Util {
     }
 
     private fun setupButtonAction() {
+        val etLoginEmail = binding.etLoginEmail.text
+        val etLoginPass = binding.etLoginEmail.text
         binding.btnLoginLogin.setOnClickListener {
-
+            loginUser(
+                LoginRequest(
+                    etLoginEmail.toString(),
+                    etLoginPass.toString()
+                )
+            )
         }
+    }
+
+    private fun loginUser(loginRequest: LoginRequest) {
+
     }
 }
