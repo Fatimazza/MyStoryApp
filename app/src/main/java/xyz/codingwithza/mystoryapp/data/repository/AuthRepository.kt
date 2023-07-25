@@ -60,11 +60,15 @@ class AuthRepository private constructor(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
-                    TODO("Not yet implemented")
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            loginResult.value = Result.Success(it)
+                        }
+                    }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    loginResult.value = Result.Error(t.message.toString())
                 }
             })
         return loginResult
