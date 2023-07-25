@@ -2,6 +2,7 @@ package xyz.codingwithza.mystoryapp.view.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.data.remote.Result
@@ -48,6 +49,7 @@ class LoginActivity : AppCompatActivity(), Util {
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        showLoading(true)
                         Toast.makeText(
                             this,
                             "~ Loading ~",
@@ -55,6 +57,7 @@ class LoginActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
+                        showLoading(false)
                         Toast.makeText(
                             this,
                             "Login SUCCESS " + result.data.message.toString(),
@@ -62,6 +65,7 @@ class LoginActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Error -> {
+                        showLoading(false)
                         Toast.makeText(
                             this,
                             "Login ERROR " + result.error,
@@ -72,4 +76,20 @@ class LoginActivity : AppCompatActivity(), Util {
             }
         }
     }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            etLoginEmail.isEnabled = !isLoading
+            etLoginPassword.isEnabled = !isLoading
+
+            if (isLoading) {
+                btnLoginLogin.visibility = View.GONE
+                pbLogin.visibility = View.VISIBLE
+            } else {
+                btnLoginLogin.visibility = View.VISIBLE
+                pbLogin.visibility = View.GONE
+            }
+        }
+    }
+
 }
