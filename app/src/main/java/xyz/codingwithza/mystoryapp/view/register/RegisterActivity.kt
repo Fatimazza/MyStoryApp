@@ -45,7 +45,9 @@ class RegisterActivity : AppCompatActivity(), Util {
                     "Name, Email, and Password cannot be empty",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (binding.etRegisterPassword.error != null) {
+            } else if (binding.etRegisterPassword.error != null
+                || binding.etRegisterEmail.error != null
+            ) {
                 Toast.makeText(
                     this,
                     "One or more input is not valid",
