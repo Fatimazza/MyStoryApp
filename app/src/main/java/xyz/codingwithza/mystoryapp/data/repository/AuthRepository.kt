@@ -64,6 +64,12 @@ class AuthRepository private constructor(
                         response.body()?.let {
                             loginResult.value = Result.Success(it)
                         }
+                    } else {
+                        val errorBody = Gson().fromJson(
+                            response.errorBody()?.charStream(),
+                            ErrorResponse::class.java
+                        )
+                        loginResult.value = Result.Error(errorBody.message.toString())
                     }
                 }
 
