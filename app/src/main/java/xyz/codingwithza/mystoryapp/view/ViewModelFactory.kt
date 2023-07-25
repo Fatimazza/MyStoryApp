@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.data.repository.AuthRepository
 import xyz.codingwithza.mystoryapp.di.Injection
+import xyz.codingwithza.mystoryapp.view.login.LoginViewModel
 import xyz.codingwithza.mystoryapp.view.register.RegisterViewModel
 
 class ViewModelFactory private constructor(private val authRepository: AuthRepository) :
@@ -13,6 +14,8 @@ class ViewModelFactory private constructor(private val authRepository: AuthRepos
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             return RegisterViewModel(authRepository) as T
+        } else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            return LoginViewModel(authRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
