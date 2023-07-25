@@ -55,7 +55,18 @@ class AuthRepository private constructor(
         loginResult.value = Result.Loading
         val client = apiService.login(loginRequest.email, loginRequest.password)
         client
-            .enqueue(object : Callback<LoginResponse> {})
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
         return loginResult
     }
     
