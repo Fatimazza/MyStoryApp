@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
@@ -39,17 +41,17 @@ class LoginActivity : AppCompatActivity(), Util {
             if (etLoginEmail.isNullOrEmpty()
                 || etLoginPass.isNullOrEmpty()
             ) {
-                Toast.makeText(
-                    this,
-                    "Name, Email, and Password cannot be empty",
-                    Toast.LENGTH_SHORT
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.auth_blank),
+                    Snackbar.LENGTH_SHORT
                 ).show()
             } else if (binding.etLoginEmail.error != null
                 || binding.etLoginPassword.error != null) {
-                Toast.makeText(
-                    this,
-                    "One or more input is not valid",
-                    Toast.LENGTH_SHORT
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.auth_error),
+                    Snackbar.LENGTH_SHORT
                 ).show()
             } else {
                 loginUser(
@@ -75,20 +77,20 @@ class LoginActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
-                        showLoading(false)
                         Toast.makeText(
                             this,
-                            "Login SUCCESS " + result.data.message.toString(),
+                            getString(R.string.login_success) + result.data.message.toString(),
                             Toast.LENGTH_SHORT
                         ).show()
+                        showLoading(false)
                     }
                     is Result.Error -> {
-                        showLoading(false)
-                        Toast.makeText(
-                            this,
-                            "Login ERROR " + result.error,
-                            Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.login_error) + result.error,
+                            Snackbar.LENGTH_SHORT
                         ).show()
+                        showLoading(false)
                     }
                 }
             }

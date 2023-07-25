@@ -6,5 +6,9 @@
     <string name="auth_name">Name</string>
     <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
-    <string name="auth_pass_error">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="auth_pass_error">Password can\'t be less than 8 characters</string>
+    <string name="auth_error">One or more input(s) is not valid</string>
+    <string name="auth_blank">Name, Email, and Password cannot be empty</string>
+    <string name="login_error">"Login Error: "</string>
+    <string name="login_success">"Login Success: "</string>
 </resources>
