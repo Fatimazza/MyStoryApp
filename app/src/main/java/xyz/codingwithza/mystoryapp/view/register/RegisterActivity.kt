@@ -5,11 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
-import xyz.codingwithza.mystoryapp.data.remote.Result
 
 class RegisterActivity : AppCompatActivity(), Util {
 
@@ -32,15 +32,18 @@ class RegisterActivity : AppCompatActivity(), Util {
     }
 
     private fun setupButtonAction() {
+        val etRegName = binding.etRegisterName.text
+        val etRegEmail = binding.etRegisterEmail.text
+        val etRegPass = binding.etRegisterPassword.text
         binding.btnRegisterSignup.setOnClickListener {
-            registerUser(
-                RegisterRequest(
-                    binding.etRegisterName.text.toString(),
-                    binding.etRegisterEmail.text.toString(),
-                    binding.etRegisterPassword.text.toString()
+                registerUser(
+                    RegisterRequest(
+                        etRegName.toString(),
+                        etRegEmail.toString(),
+                        etRegPass.toString()
+                    )
                 )
-            )
-        }
+            }
     }
 
     private fun registerUser(registerRequest: RegisterRequest) {
