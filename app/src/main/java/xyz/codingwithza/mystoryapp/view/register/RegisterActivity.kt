@@ -1,8 +1,8 @@
 package xyz.codingwithza.mystoryapp.view.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -12,6 +12,9 @@ import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+import xyz.codingwithza.mystoryapp.view.login.LoginActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 class RegisterActivity : AppCompatActivity(), Util {
 
@@ -73,11 +76,6 @@ class RegisterActivity : AppCompatActivity(), Util {
                 when (result) {
                     is Result.Loading -> {
                         showLoading(true)
-                        Toast.makeText(
-                            this,
-                            "~ Loading ~",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                     is Result.Success -> {
                         Snackbar.make(
@@ -86,6 +84,10 @@ class RegisterActivity : AppCompatActivity(), Util {
                             Snackbar.LENGTH_SHORT
                         ).show()
                         showLoading(false)
+                        Timer().schedule(2000) {
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                            finish()
+                        }
                     }
                     is Result.Error -> {
                         Snackbar.make(
