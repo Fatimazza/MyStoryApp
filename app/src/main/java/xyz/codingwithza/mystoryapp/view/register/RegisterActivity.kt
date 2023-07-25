@@ -36,6 +36,22 @@ class RegisterActivity : AppCompatActivity(), Util {
         val etRegEmail = binding.etRegisterEmail.text
         val etRegPass = binding.etRegisterPassword.text
         binding.btnRegisterSignup.setOnClickListener {
+            if (etRegName.isNullOrEmpty()
+                || etRegEmail.isNullOrEmpty()
+                || etRegPass.isNullOrEmpty()
+            ) {
+                Toast.makeText(
+                    this,
+                    "Name, Email, and Password cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (binding.etRegisterPassword.error != null) {
+                Toast.makeText(
+                    this,
+                    "One or more input is not valid",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 registerUser(
                     RegisterRequest(
                         etRegName.toString(),
@@ -44,6 +60,7 @@ class RegisterActivity : AppCompatActivity(), Util {
                     )
                 )
             }
+        }
     }
 
     private fun registerUser(registerRequest: RegisterRequest) {
