@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), Util {
             ) {
                 Snackbar.make(
                     binding.root,
-                    getString(R.string.auth_blank),
+                    getString(R.string.auth_blank_login),
                     Snackbar.LENGTH_SHORT
                 ).show()
             } else if (binding.etLoginEmail.error != null
