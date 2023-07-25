@@ -19,10 +19,17 @@ class LoginActivity : AppCompatActivity(), Util {
 
         setupFullScreenView(window, supportActionBar)
         initViewModel()
+        setupButtonAction()
     }
 
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance()
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+    }
+
+    private fun setupButtonAction() {
+        binding.btnLoginLogin.setOnClickListener {
+
+        }
     }
 }
