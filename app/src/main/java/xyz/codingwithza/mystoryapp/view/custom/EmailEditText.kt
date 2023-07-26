@@ -24,10 +24,12 @@ class EmailEditText: TextInputEditText {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
+                if (s.toString().isNotEmpty()) {
+                    if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
                         error = "Invalid Email"
-                } else {
-                    error = null
+                    } else {
+                        error = null
+                    }
                 }
             }
 
