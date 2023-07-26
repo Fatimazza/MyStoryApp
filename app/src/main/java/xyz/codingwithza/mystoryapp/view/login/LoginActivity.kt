@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
+import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
@@ -17,6 +18,7 @@ class LoginActivity : AppCompatActivity(), Util {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var user: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +27,20 @@ class LoginActivity : AppCompatActivity(), Util {
 
         setupFullScreenView(window, supportActionBar)
         initViewModel()
+        getUserFromPreferences()
         setupButtonAction()
     }
 
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+    }
+
+    private fun getUserFromPreferences() {
+        loginViewModel.getUserData().observe(this) { user ->
+            this.user = user
+            binding.etLoginEmail.setText(user.email)
+        }
     }
 
     private fun setupButtonAction() {
