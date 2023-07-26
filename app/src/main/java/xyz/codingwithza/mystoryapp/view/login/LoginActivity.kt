@@ -44,11 +44,10 @@ class LoginActivity : AppCompatActivity(), Util {
     }
 
     private fun setupButtonAction() {
-        val etLoginEmail = binding.etLoginEmail.text
-        val etLoginPass = binding.etLoginPassword.text
         binding.btnLoginLogin.setOnClickListener {
-
-            if (etLoginEmail.isNullOrEmpty()
+            val etLoginEmail = binding.etLoginEmail.editableText
+            val etLoginPass = binding.etLoginPassword.text
+            if (etLoginEmail.toString().isEmpty()
                 || etLoginPass.isNullOrEmpty()
             ) {
                 Snackbar.make(
