@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
+import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
@@ -84,6 +85,14 @@ class RegisterActivity : AppCompatActivity(), Util {
                             Snackbar.LENGTH_SHORT
                         ).show()
                         showLoading(false)
+                        saveUserData(
+                            UserModel(
+                                registerRequest.name,
+                                registerRequest.email,
+                                "",
+                                false
+                            )
+                        )
                         Timer().schedule(2000) {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                             finish()
@@ -100,6 +109,10 @@ class RegisterActivity : AppCompatActivity(), Util {
                 }
             }
         }
+    }
+
+    private fun saveUserData(userData: UserModel) {
+        registerViewModel.saveUserData(userData)
     }
 
     private fun showLoading(isLoading: Boolean) {
