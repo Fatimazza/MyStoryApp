@@ -4,6 +4,9 @@ package xyz.codingwithza.mystoryapp.view.story
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ItemStoryBinding
 
@@ -25,6 +28,12 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
             binding.apply {
                 tvStoryName.text = stories.name
                 tvStoryDesc.text = stories.description
+
+                Glide.with(itemView.context)
+                    .load(stories.photoUrl)
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_image_search_24))
+                    .error(R.drawable.ic_baseline_broken_image_24)
+                    .into(ivStoryPhoto)
             }
         }
     }
