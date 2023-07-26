@@ -1,5 +1,6 @@
 package xyz.codingwithza.mystoryapp.view.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,9 @@ import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+import xyz.codingwithza.mystoryapp.view.story.StoryActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 class LoginActivity : AppCompatActivity(), Util {
 
@@ -86,10 +90,10 @@ class LoginActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
-                        Toast.makeText(
-                            this,
+                        Snackbar.make(
+                            binding.root,
                             getString(R.string.login_success) + result.data.message.toString(),
-                            Toast.LENGTH_SHORT
+                            Snackbar.LENGTH_SHORT
                         ).show()
                         showLoading(false)
                         saveUserData(
@@ -100,7 +104,10 @@ class LoginActivity : AppCompatActivity(), Util {
                                 true
                             )
                         )
-
+                        Timer().schedule(2000) {
+                            startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
+                            finish()
+                        }
                     }
                     is Result.Error -> {
                         Snackbar.make(
