@@ -93,6 +93,15 @@ class LoginActivity : AppCompatActivity(), Util {
                             Toast.LENGTH_SHORT
                         ).show()
                         showLoading(false)
+                        saveUserData(
+                            UserModel(
+                                result.data.loginResult?.name.toString(),
+                                loginRequest.email,
+                                result.data.loginResult?.token.toString(),
+                                true
+                            )
+                        )
+
                     }
                     is Result.Error -> {
                         Snackbar.make(
@@ -105,6 +114,10 @@ class LoginActivity : AppCompatActivity(), Util {
                 }
             }
         }
+    }
+
+    private fun saveUserData(userData: UserModel) {
+        loginViewModel.saveUserData(userData)
     }
 
     private fun showLoading(isLoading: Boolean) {
