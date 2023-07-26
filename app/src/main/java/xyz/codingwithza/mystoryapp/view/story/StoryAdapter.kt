@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ItemStoryBinding
 
-class StoryAdapter(): RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
     private var storyList = ArrayList<ListStoryItem>()
 
-    inner class StoryViewHolder (val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class StoryViewHolder(val binding: ItemStoryBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
