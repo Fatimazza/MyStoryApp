@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity(), Util {
     }
 
     private fun initViewModel() {
-        val factory: ViewModelFactory = ViewModelFactory.getInstance()
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         registerViewModel = ViewModelProvider(this, factory)[RegisterViewModel::class.java]
     }
 

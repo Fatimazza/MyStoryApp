@@ -1,5 +1,6 @@
 package xyz.codingwithza.mystoryapp.view
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.data.repository.AuthRepository
@@ -7,8 +8,9 @@ import xyz.codingwithza.mystoryapp.di.Injection
 import xyz.codingwithza.mystoryapp.view.login.LoginViewModel
 import xyz.codingwithza.mystoryapp.view.register.RegisterViewModel
 
-class ViewModelFactory private constructor(private val authRepository: AuthRepository) :
-    ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(
+    private val authRepository: AuthRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -26,9 +28,9 @@ class ViewModelFactory private constructor(private val authRepository: AuthRepos
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
-        fun getInstance(): ViewModelFactory =
+        fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideAuthRepository())
+                instance ?: ViewModelFactory(Injection.provideAuthRepository(context))
             }.also { instance = it }
     }
 }
