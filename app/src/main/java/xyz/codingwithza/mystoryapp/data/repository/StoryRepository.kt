@@ -1,6 +1,7 @@
 package xyz.codingwithza.mystoryapp.data.repository
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.google.gson.Gson
 import retrofit2.Call
@@ -17,8 +18,9 @@ class StoryRepository private constructor(
 
     private val storyResult = MediatorLiveData<Result<StoryResponse>>()
 
-    fun getAllStories(token: String) {
-        val client = apiService.getAllStory(token)
+    fun getAllStories(token: String): LiveData<Result<StoryResponse>> {
+        storyResult.value = Result.Loading
+        val client = apiService.getAllStory("Bearer $token")
         client
             .enqueue(object : Callback<StoryResponse> {
                 override fun onResponse(
@@ -42,6 +44,7 @@ class StoryRepository private constructor(
                     storyResult.value = Result.Error(t.message.toString())
                 }
             })
+        return storyResult
     }
 
     companion object {
