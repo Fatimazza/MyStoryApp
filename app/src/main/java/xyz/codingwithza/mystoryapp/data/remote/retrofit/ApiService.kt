@@ -1,9 +1,8 @@
 package xyz.codingwithza.mystoryapp.data.remote.retrofit
 
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
+import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.LoginResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.RegisterResponse
 
@@ -23,4 +22,11 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<LoginResponse>
+
+    @GET("stories")
+    fun getAllStory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Call<StoryResponse>
 }

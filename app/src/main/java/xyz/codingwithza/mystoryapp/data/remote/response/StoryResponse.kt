@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class Story(
+data class StoryResponse(
 
 	@field:SerializedName("listStory")
 	val listStory: List<ListStoryItem?>? = null,
