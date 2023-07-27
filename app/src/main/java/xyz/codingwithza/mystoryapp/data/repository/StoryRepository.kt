@@ -1,14 +1,21 @@
 package xyz.codingwithza.mystoryapp.data.repository
 
 
+import androidx.lifecycle.MediatorLiveData
+import retrofit2.Callback
+import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
 class StoryRepository private constructor(
     private val apiService: ApiService
 ){
 
-    fun getAllStories() {
+    private val storyResult = MediatorLiveData<Result<StoryResponse>>()
 
+    fun getAllStories(token: String) {
+        val client = apiService.getAllStory(token)
+        client
+            .enqueue(object : Callback<StoryResponse> {})
     }
 
     companion object {
