@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+
 
 private lateinit var binding: ActivityStoryBinding
 private lateinit var storyViewModel: StoryViewModel
@@ -19,6 +21,7 @@ class StoryActivity : AppCompatActivity() {
 
         setupView()
         initViewModel()
+        showAllStories()
     }
 
     private fun setupView() {
@@ -33,6 +36,26 @@ class StoryActivity : AppCompatActivity() {
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         storyViewModel = ViewModelProvider(this, factory)[StoryViewModel::class.java]
+    }
+
+    private fun showAllStories() {
+        storyViewModel.getUserData().observe(this) { user ->
+            storyViewModel.getAllStories(user.token).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            showLoading(true)
+                        }
+                        is Result.Success -> {
+                            showLoading(false)
+                        }
+                        is Result.Error -> {
+                            showLoading(false)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
