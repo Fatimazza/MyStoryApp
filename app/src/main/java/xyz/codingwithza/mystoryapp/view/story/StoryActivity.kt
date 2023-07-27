@@ -2,6 +2,7 @@ package xyz.codingwithza.mystoryapp.view.story
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
@@ -32,5 +33,17 @@ class StoryActivity : AppCompatActivity() {
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         storyViewModel = ViewModelProvider(this, factory)[StoryViewModel::class.java]
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                rvStory.visibility = View.GONE
+                pbStory.visibility = View.VISIBLE
+            } else {
+                rvStory.visibility = View.VISIBLE
+                pbStory.visibility = View.GONE
+            }
+        }
     }
 }
