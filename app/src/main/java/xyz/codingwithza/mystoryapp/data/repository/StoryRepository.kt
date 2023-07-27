@@ -2,7 +2,9 @@ package xyz.codingwithza.mystoryapp.data.repository
 
 
 import androidx.lifecycle.MediatorLiveData
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
@@ -15,7 +17,18 @@ class StoryRepository private constructor(
     fun getAllStories(token: String) {
         val client = apiService.getAllStory(token)
         client
-            .enqueue(object : Callback<StoryResponse> {})
+            .enqueue(object : Callback<StoryResponse> {
+                override fun onResponse(
+                    call: Call<StoryResponse>,
+                    response: Response<StoryResponse>
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 
     companion object {
