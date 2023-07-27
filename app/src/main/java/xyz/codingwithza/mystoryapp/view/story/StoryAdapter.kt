@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
+import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.databinding.ItemStoryBinding
 
 class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
@@ -39,4 +40,9 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     }
 
     override fun getItemCount(): Int = storyList.size
+
+    fun setData(newList: List<ListStoryItem>){
+        this.storyList.clear()
+        this.storyList.addAll(newList)
+    }
 }

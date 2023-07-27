@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -12,6 +13,7 @@ import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
 private lateinit var binding: ActivityStoryBinding
 private lateinit var storyViewModel: StoryViewModel
+private lateinit var storyAdapter: StoryAdapter
 
 class StoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,7 @@ class StoryActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        val storyAdapter = StoryAdapter()
+        storyAdapter = StoryAdapter()
         binding.apply {
             rvStory.adapter = storyAdapter
             rvStory.layoutManager = LinearLayoutManager(this@StoryActivity)
@@ -47,6 +49,7 @@ class StoryActivity : AppCompatActivity() {
                             showLoading(true)
                         }
                         is Result.Success -> {
+                            storyAdapter.setData(result.data.listStory as List<ListStoryItem>)
                             showLoading(false)
                         }
                         is Result.Error -> {
