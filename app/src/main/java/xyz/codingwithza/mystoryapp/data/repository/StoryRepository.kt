@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.codingwithza.mystoryapp.data.local.StoryResponse
+import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
 class StoryRepository private constructor(
@@ -22,11 +23,14 @@ class StoryRepository private constructor(
                     call: Call<StoryResponse>,
                     response: Response<StoryResponse>
                 ) {
-                    TODO("Not yet implemented")
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            storyResult.value = Result.Success(it)
+                        }
+                    }
                 }
-
                 override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    storyResult.value = Result.Error(t.message.toString())
                 }
             })
     }
