@@ -7,6 +7,7 @@ import xyz.codingwithza.mystoryapp.data.repository.AuthRepository
 import xyz.codingwithza.mystoryapp.data.repository.StoryRepository
 import xyz.codingwithza.mystoryapp.di.Injection
 import xyz.codingwithza.mystoryapp.view.login.LoginViewModel
+import xyz.codingwithza.mystoryapp.view.main.MainViewModel
 import xyz.codingwithza.mystoryapp.view.register.RegisterViewModel
 import xyz.codingwithza.mystoryapp.view.story.StoryViewModel
 
@@ -18,6 +19,9 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(authRepository) as T
+            }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(authRepository) as T
             }
