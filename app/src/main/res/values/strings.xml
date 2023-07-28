@@ -16,4 +16,7 @@
     <string name="register_success">"Register Success: "</string>
     <string name="load_error">"Loading Error: "</string>
     <string name="auth_logout">Log out</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+    <string name="auth_logout_warning">Are you sure want to Log out?</string>
 </resources>

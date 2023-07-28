@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import xyz.codingwithza.mystoryapp.MainActivity
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
@@ -112,11 +114,20 @@ class StoryActivity : AppCompatActivity() {
     private fun setMenuItem(action: Int) {
         when (action) {
             R.id.action_logout -> {
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.auth_logout),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                AlertDialog.Builder(this).apply {
+                    setTitle(R.string.auth_logout)
+                    setMessage(getString(R.string.auth_logout_warning))
+                    setPositiveButton(getString(R.string.button_yes)) { _, _ ->
+                        storyViewModel.logout()
+                        startActivity(Intent(this@StoryActivity, MainActivity::class.java))
+                        finishAffinity()
+                    }
+                    setNegativeButton(getString(R.string.button_no)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    create()
+                    show()
+                }
             }
         }
     }
