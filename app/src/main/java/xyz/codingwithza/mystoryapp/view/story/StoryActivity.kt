@@ -21,11 +21,12 @@ import xyz.codingwithza.mystoryapp.view.addStory.AddStoryActivity
 import xyz.codingwithza.mystoryapp.view.storydetail.StoryDetailActivity
 
 
-private lateinit var binding: ActivityStoryBinding
-private lateinit var storyViewModel: StoryViewModel
-private lateinit var storyAdapter: StoryAdapter
-
 class StoryActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityStoryBinding
+    private lateinit var storyViewModel: StoryViewModel
+    private lateinit var storyAdapter: StoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryBinding.inflate(layoutInflater)
