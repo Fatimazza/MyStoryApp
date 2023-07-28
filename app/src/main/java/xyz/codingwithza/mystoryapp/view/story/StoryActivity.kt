@@ -1,5 +1,6 @@
 package xyz.codingwithza.mystoryapp.view.story
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+import xyz.codingwithza.mystoryapp.view.storydetail.StoryDetailActivity
 
 
 private lateinit var binding: ActivityStoryBinding
@@ -24,6 +26,7 @@ class StoryActivity : AppCompatActivity() {
         setupView()
         initViewModel()
         showAllStories()
+        addListClickListener()
     }
 
     private fun setupView() {
@@ -59,6 +62,14 @@ class StoryActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun addListClickListener() {
+        storyAdapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: ListStoryItem) {
+                startActivity(Intent(this@StoryActivity, StoryDetailActivity::class.java))
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
