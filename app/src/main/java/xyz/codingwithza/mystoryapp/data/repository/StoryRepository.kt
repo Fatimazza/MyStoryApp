@@ -4,7 +4,9 @@ package xyz.codingwithza.mystoryapp.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +26,10 @@ class StoryRepository private constructor(
 
     fun getUserData(): LiveData<UserModel> {
         return pref.getUser().asLiveData()
+    }
+
+    suspend fun logout() {
+        pref.logout()
     }
 
     fun getAllStories(token: String): LiveData<Result<StoryResponse>> {
