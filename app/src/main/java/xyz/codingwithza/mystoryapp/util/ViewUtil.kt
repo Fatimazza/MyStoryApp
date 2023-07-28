@@ -6,7 +6,8 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 
-interface Util {
+interface ViewUtil {
+    
     fun setupFullScreenView(window: Window, supportActionBar: ActionBar?) {
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

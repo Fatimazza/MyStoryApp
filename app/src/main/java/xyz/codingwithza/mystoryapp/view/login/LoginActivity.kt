@@ -13,12 +13,12 @@ import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.LoginRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
-import xyz.codingwithza.mystoryapp.util.Util
+import xyz.codingwithza.mystoryapp.util.ViewUtil
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.story.StoryActivity
 
 
-class LoginActivity : AppCompatActivity(), Util {
+class LoginActivity : AppCompatActivity(), ViewUtil {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel

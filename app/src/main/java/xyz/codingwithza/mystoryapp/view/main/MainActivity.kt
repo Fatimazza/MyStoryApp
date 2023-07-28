@@ -8,13 +8,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.databinding.ActivityMainBinding
-import xyz.codingwithza.mystoryapp.util.Util
+import xyz.codingwithza.mystoryapp.util.ViewUtil
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.login.LoginActivity
 import xyz.codingwithza.mystoryapp.view.register.RegisterActivity
 import xyz.codingwithza.mystoryapp.view.story.StoryActivity
 
-class MainActivity : AppCompatActivity(), Util {
+class MainActivity : AppCompatActivity(), ViewUtil {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel

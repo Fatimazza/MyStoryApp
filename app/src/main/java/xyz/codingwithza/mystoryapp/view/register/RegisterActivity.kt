@@ -11,13 +11,13 @@ import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.request.RegisterRequest
 import xyz.codingwithza.mystoryapp.databinding.ActivityRegisterBinding
-import xyz.codingwithza.mystoryapp.util.Util
+import xyz.codingwithza.mystoryapp.util.ViewUtil
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.login.LoginActivity
 import java.util.*
 import kotlin.concurrent.schedule
 
-class RegisterActivity : AppCompatActivity(), Util {
+class RegisterActivity : AppCompatActivity(), ViewUtil {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
