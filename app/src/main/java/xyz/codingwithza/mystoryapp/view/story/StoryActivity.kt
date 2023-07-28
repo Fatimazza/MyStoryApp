@@ -17,6 +17,7 @@ import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
+import xyz.codingwithza.mystoryapp.view.addStory.AddStoryActivity
 import xyz.codingwithza.mystoryapp.view.storydetail.StoryDetailActivity
 
 
@@ -44,6 +45,9 @@ class StoryActivity : AppCompatActivity() {
             rvStory.setHasFixedSize(true)
 
             swipeStoryLayout.setOnRefreshListener { showAllStories() }
+            fabStoryAdd.setOnClickListener {
+                startActivity(Intent(this@StoryActivity, AddStoryActivity::class.java))
+            }
         }
     }
 
