@@ -95,7 +95,7 @@ class RegisterActivity : AppCompatActivity(), Util {
                         )
                         Timer().schedule(2000) {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                            finish()
+                            finishAffinity()
                         }
                     }
                     is Result.Error -> {
