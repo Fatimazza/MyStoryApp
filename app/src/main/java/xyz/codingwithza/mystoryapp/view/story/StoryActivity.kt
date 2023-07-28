@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
@@ -35,6 +37,8 @@ class StoryActivity : AppCompatActivity() {
             rvStory.adapter = storyAdapter
             rvStory.layoutManager = LinearLayoutManager(this@StoryActivity)
             rvStory.setHasFixedSize(true)
+
+            swipeStoryLayout.setOnRefreshListener { showAllStories() }
         }
     }
 
@@ -54,9 +58,16 @@ class StoryActivity : AppCompatActivity() {
                         is Result.Success -> {
                             storyAdapter.setData(result.data.listStory as List<ListStoryItem>)
                             showLoading(false)
+                            binding.swipeStoryLayout.isRefreshing = false
                         }
                         is Result.Error -> {
                             showLoading(false)
+                            binding.swipeStoryLayout.isRefreshing = false
+                            Snackbar.make(
+                                binding.root,
+                                getString(R.string.load_error) + result.error,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

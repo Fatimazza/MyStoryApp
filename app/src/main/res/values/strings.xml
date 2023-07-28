@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MyStoryApp</string>
     <string name="welcome_title">Welcome to My Story App</string>
     <string name="auth_log_in">Login</string>
@@ -14,4 +14,5 @@
     <string name="login_success">"Login Success: "</string>
     <string name="register_error">"Register Error: "</string>
     <string name="register_success">"Register Success: "</string>
+    <string name="load_error">"Loading Error: "</string>
 </resources>
