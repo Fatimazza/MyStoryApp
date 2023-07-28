@@ -11,5 +11,13 @@ class AddStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupButtonAction()
+    }
+
+    private fun setupButtonAction() {
+        binding.btnAddGallery.setOnClickListener {
+
+        }
     }
 }
