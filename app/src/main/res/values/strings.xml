@@ -15,4 +15,5 @@
     <string name="register_error">"Register Error: "</string>
     <string name="register_success">"Register Success: "</string>
     <string name="load_error">"Loading Error: "</string>
+    <string name="auth_logout">Log out</string>
 </resources>
