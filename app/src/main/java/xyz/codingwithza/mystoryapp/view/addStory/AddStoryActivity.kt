@@ -29,11 +29,11 @@ class AddStoryActivity : AppCompatActivity() {
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        requestPermisson()
+        requestPermission()
         setupButtonAction()
     }
 
-    private fun requestPermisson() {
+    private fun requestPermission() {
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
