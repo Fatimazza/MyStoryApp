@@ -1,4 +1,4 @@
-package xyz.codingwithza.mystoryapp
+package xyz.codingwithza.mystoryapp.view.main
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
