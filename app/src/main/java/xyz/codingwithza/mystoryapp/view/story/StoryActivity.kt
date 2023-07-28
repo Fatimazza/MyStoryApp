@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -96,6 +97,23 @@ class StoryActivity : AppCompatActivity() {
             } else {
                 rvStory.visibility = View.VISIBLE
                 pbStory.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        setMenuItem(item.itemId)
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setMenuItem(action: Int) {
+        when (action) {
+            R.id.action_logout -> {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.auth_logout),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
     }
