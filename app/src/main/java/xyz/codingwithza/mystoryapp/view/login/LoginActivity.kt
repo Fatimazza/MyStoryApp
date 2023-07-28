@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
@@ -15,8 +16,7 @@ import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
 import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.story.StoryActivity
-import java.util.*
-import kotlin.concurrent.schedule
+
 
 class LoginActivity : AppCompatActivity(), Util {
 
@@ -90,11 +90,6 @@ class LoginActivity : AppCompatActivity(), Util {
                         ).show()
                     }
                     is Result.Success -> {
-                        Snackbar.make(
-                            binding.root,
-                            getString(R.string.login_success) + result.data.message.toString(),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
                         showLoading(false)
                         saveUserData(
                             UserModel(
@@ -104,9 +99,15 @@ class LoginActivity : AppCompatActivity(), Util {
                                 true
                             )
                         )
-                        Timer().schedule(2000) {
-                            startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
-                            finish()
+                        AlertDialog.Builder(this).apply {
+                            setTitle(R.string.login_success)
+                            setMessage(getString(R.string.story_description))
+                            setPositiveButton(getString(R.string.button_yes)) { _, _ ->
+                                startActivity(Intent(this@LoginActivity, StoryActivity::class.java))
+                                finishAffinity()
+                            }
+                            create()
+                            show()
                         }
                     }
                     is Result.Error -> {
