@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 
-private lateinit var binding: ActivityAddStoryBinding
 
 class AddStoryActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAddStoryBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
