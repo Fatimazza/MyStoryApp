@@ -3,6 +3,7 @@ package xyz.codingwithza.mystoryapp.view.story
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -97,5 +98,10 @@ class StoryActivity : AppCompatActivity() {
                 pbStory.visibility = View.GONE
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_story, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
