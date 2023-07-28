@@ -67,7 +67,11 @@ class StoryActivity : AppCompatActivity() {
     private fun addListClickListener() {
         storyAdapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ListStoryItem) {
-                startActivity(Intent(this@StoryActivity, StoryDetailActivity::class.java))
+                val moveIntentWithBundle = Intent(this@StoryActivity, StoryDetailActivity::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable(StoryDetailActivity.EXTRA_STORY, data)
+                moveIntentWithBundle.putExtras(bundle)
+                startActivity(moveIntentWithBundle)
             }
         })
     }
