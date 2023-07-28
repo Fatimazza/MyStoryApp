@@ -12,6 +12,7 @@ import xyz.codingwithza.mystoryapp.util.Util
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.login.LoginActivity
 import xyz.codingwithza.mystoryapp.view.register.RegisterActivity
+import xyz.codingwithza.mystoryapp.view.story.StoryActivity
 
 class MainActivity : AppCompatActivity(), Util {
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), Util {
         setContentView(binding.root)
 
         initViewModel()
+        getUserFromPreferences()
         setupAction()
         setupFullScreenView(window, supportActionBar)
         playAnimation()
@@ -32,6 +34,15 @@ class MainActivity : AppCompatActivity(), Util {
     private fun initViewModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
+    }
+
+    private fun getUserFromPreferences() {
+        mainViewModel.getUserData().observe(this) { user ->
+            if (user.isLogin) {
+                startActivity(Intent(this, StoryActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 
     private fun playAnimation(){
