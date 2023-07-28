@@ -8,12 +8,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
-import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.databinding.ItemStoryBinding
 
 class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
     private var storyList = ArrayList<ListStoryItem>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     inner class StoryViewHolder(val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -36,6 +36,9 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
                     .error(R.drawable.ic_baseline_broken_image_24)
                     .into(ivStoryPhoto)
             }
+            itemView.setOnClickListener {
+                onItemClickCallback.onItemClicked(storyList[holder.bindingAdapterPosition])
+            }
         }
     }
 
@@ -44,5 +47,13 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     fun setData(newList: List<ListStoryItem>){
         this.storyList.clear()
         this.storyList.addAll(newList)
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: ListStoryItem)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
     }
 }
