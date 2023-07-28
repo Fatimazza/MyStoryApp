@@ -2,14 +2,14 @@ package xyz.codingwithza.mystoryapp.view.addStory
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import xyz.codingwithza.mystoryapp.databinding.ActivityLoginBinding
+import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 
-private lateinit var binding: ActivityLoginBinding
+private lateinit var binding: ActivityAddStoryBinding
 
 class AddStoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
