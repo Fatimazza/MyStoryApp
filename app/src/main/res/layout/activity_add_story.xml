@@ -85,7 +85,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descEditTextLayout"
+            android:id="@+id/etAddStoryDescLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -97,7 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivAddPreview" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_add_description"
+                android:id="@+id/etAddStoryDesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/story_desc"
