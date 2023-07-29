@@ -24,7 +24,7 @@ class StoryRepository private constructor(
 ) {
 
     private val storyResult = MediatorLiveData<Result<StoryResponse>>()
-    private val addStoryResult = MediatorLiveData<Result<AddStoryResponse>>()
+    private val addStoryResult = MediatorLiveData<Result<String>>()
 
     fun getUserData(): LiveData<UserModel> {
         return pref.getUser().asLiveData()
@@ -65,8 +65,7 @@ class StoryRepository private constructor(
 
     fun uploadStory(token: String,
                     imageMultipart: MultipartBody.Part,
-                    description: RequestBody
-    ) : LiveData<Result<AddStoryResponse>> {
+                    description: RequestBody) : MediatorLiveData<Result<String>> {
         addStoryResult.value = Result.Loading
         val client = apiService.uploadImage("Bearer $token", imageMultipart, description)
         client.enqueue(object : Callback<AddStoryResponse> {
@@ -76,7 +75,7 @@ class StoryRepository private constructor(
             ) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        addStoryResult.value = Result.Success(it)
+                        addStoryResult.value = Result.Success(it.message.toString())
                     }
                 } else {
                     val errorBody = Gson().fromJson(
