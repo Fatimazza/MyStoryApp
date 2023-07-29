@@ -155,4 +155,20 @@ class AddStoryActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                btnAddGallery.isEnabled = false
+                btnAddCamera.isEnabled = false
+                btnAddStory.visibility = View.GONE
+                pbAddStory.visibility = View.VISIBLE
+            } else {
+                btnAddGallery.isEnabled= false
+                btnAddCamera.isEnabled = false
+                btnAddStory.visibility = View.VISIBLE
+                pbAddStory.visibility = View.GONE
+            }
+        }
+    }
 }
