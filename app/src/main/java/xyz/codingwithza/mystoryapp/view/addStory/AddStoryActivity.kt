@@ -24,6 +24,7 @@ import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 import xyz.codingwithza.mystoryapp.util.createCustomTempFile
+import xyz.codingwithza.mystoryapp.util.reduceFileImage
 import xyz.codingwithza.mystoryapp.util.rotateFile
 import xyz.codingwithza.mystoryapp.util.uriToFile
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -83,7 +84,7 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun addStory() {
         if (getFile != null) {
-            val file = getFile as File
+            val file = reduceFileImage(getFile as File)
             val description =
                 binding.etAddStoryDesc.text.toString().toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
