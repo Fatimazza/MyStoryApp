@@ -70,7 +70,19 @@ class StoryRepository private constructor(
                     description: RequestBody
     ) : LiveData<Result<AddStoryResponse>> {
         addstoryResult.value = Result.Loading
-        
+        val client = apiService.uploadImage("Bearer $token", imageMultipart, description)
+        client.enqueue(object : Callback<AddStoryResponse> {
+            override fun onResponse(
+                call: Call<AddStoryResponse>,
+                response: Response<AddStoryResponse>
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<AddStoryResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
         return addstoryResult
     }
 
