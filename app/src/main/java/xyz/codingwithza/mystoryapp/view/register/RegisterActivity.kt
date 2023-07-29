@@ -93,7 +93,7 @@ class RegisterActivity : AppCompatActivity(), ViewUtil {
                                 false
                             )
                         )
-                        Timer().schedule(2000) {
+                        Timer().schedule(1000) {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                             finishAffinity()
                         }
