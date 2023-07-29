@@ -46,6 +46,13 @@ class MainActivity : AppCompatActivity(), ViewUtil {
     }
 
     private fun playAnimation(){
+        ObjectAnimator.ofFloat(binding.ivWelcomePhoto, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 3000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            startDelay = 500
+        }.start()
+
         val title = ObjectAnimator.ofFloat(binding.tvWelcomeTitle, View.ALPHA, 1f).apply {
             duration = 500
             startDelay = 500
