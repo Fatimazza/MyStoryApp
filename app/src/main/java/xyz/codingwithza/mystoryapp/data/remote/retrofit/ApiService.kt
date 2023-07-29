@@ -32,7 +32,7 @@ interface ApiService {
     ): Call<StoryResponse>
 
     @Multipart
-    @POST("/v1/stories/guest")
+    @POST("stories")
     fun uploadImage(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
