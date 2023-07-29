@@ -47,6 +47,7 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     fun setData(newList: List<ListStoryItem>){
         this.storyList.clear()
         this.storyList.addAll(newList)
+        notifyDataSetChanged()
     }
 
     interface OnItemClickCallback {
