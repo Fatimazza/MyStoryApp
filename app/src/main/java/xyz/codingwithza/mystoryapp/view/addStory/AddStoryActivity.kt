@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 import xyz.codingwithza.mystoryapp.util.createCustomTempFile
@@ -28,6 +29,7 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var addStoryViewModel: AddStoryViewModel
     private lateinit var currentPhotoPath: String
+    private var getFile: File? = null
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -66,6 +68,21 @@ class AddStoryActivity : AppCompatActivity() {
         binding.btnAddCamera.setOnClickListener {
             openIntentCamera()
         }
+        binding.btnAddStory.setOnClickListener {
+            addStory()
+        }
+    }
+
+    private fun addStory() {
+        if (getFile != null) {
+
+        } else {
+            Snackbar.make(
+                binding.root,
+                getString(R.string.story_add_warning),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun openIntentGallery() {
@@ -83,6 +100,7 @@ class AddStoryActivity : AppCompatActivity() {
             val selectedImg = result.data?.data as Uri
             selectedImg.let { uri ->
                 val myFile = uriToFile(uri, this@AddStoryActivity)
+                getFile = myFile
                 binding.ivAddPreview.setImageURI(uri)
             }
         }
@@ -110,6 +128,7 @@ class AddStoryActivity : AppCompatActivity() {
             val myFile = File(currentPhotoPath)
             myFile.let { file ->
                 rotateFile(file)
+                getFile = file
                 binding.ivAddPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
         }

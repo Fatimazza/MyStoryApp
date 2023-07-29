@@ -25,4 +25,5 @@
     <string name="story_add">Add Story</string>
     <string name="story_desc">Description</string>
     <string name="permission_denied">Not getting any Permission.</string>
+    <string name="story_add_warning">Please add image from Gallery or Camera first.</string>
 </resources>
