@@ -13,17 +13,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 import xyz.codingwithza.mystoryapp.util.createCustomTempFile
 import xyz.codingwithza.mystoryapp.util.rotateFile
 import xyz.codingwithza.mystoryapp.util.uriToFile
+import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import java.io.File
 
 
 class AddStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddStoryBinding
+    private lateinit var addStoryViewModel: AddStoryViewModel
     private lateinit var currentPhotoPath: String
 
     companion object {
@@ -37,6 +40,7 @@ class AddStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         requestPermission()
+        initViewModel()
         setupButtonAction()
     }
 
@@ -48,6 +52,11 @@ class AddStoryActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+    }
+
+    private fun initViewModel() {
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+        addStoryViewModel = ViewModelProvider(this, factory)[AddStoryViewModel::class.java]
     }
 
     private fun setupButtonAction() {
