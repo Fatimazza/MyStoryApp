@@ -27,4 +27,6 @@
     <string name="permission_denied">Not getting any Permission.</string>
     <string name="story_add_warning">Please add image from Gallery or Camera first.</string>
     <string name="story_choose_gallery">Choose a Picture</string>
+    <string name="story_add_error">"Error adding story: "</string>
+    <string name="add_story_success">"Add story "</string>
 </resources>

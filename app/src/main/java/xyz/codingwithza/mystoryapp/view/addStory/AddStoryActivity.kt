@@ -21,12 +21,15 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import xyz.codingwithza.mystoryapp.R
+import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 import xyz.codingwithza.mystoryapp.util.createCustomTempFile
 import xyz.codingwithza.mystoryapp.util.rotateFile
 import xyz.codingwithza.mystoryapp.util.uriToFile
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import java.io.File
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class AddStoryActivity : AppCompatActivity() {
@@ -89,7 +92,37 @@ class AddStoryActivity : AppCompatActivity() {
                 file.name,
                 requestImageFile
             )
-            
+            addStoryViewModel.getUserData().observe(this) { user ->
+                addStoryViewModel.uploadStory(user.token, imageMultipart, description)
+                    .observe(this) { result ->
+                        if (result != null) {
+                            when (result) {
+                                is Result.Loading -> {
+                                    showLoading(true)
+                                }
+                                is Result.Success -> {
+                                    Snackbar.make(
+                                        binding.root,
+                                        getString(R.string.add_story_success) + result.data,
+                                        Snackbar.LENGTH_SHORT
+                                    ).show()
+                                    showLoading(false)
+                                    Timer().schedule(1000) {
+                                        finish()
+                                    }
+                                }
+                                is Result.Error -> {
+                                    showLoading(false)
+                                    Snackbar.make(
+                                        binding.root,
+                                        getString(R.string.story_add_error) + result.error,
+                                        Snackbar.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+            }
         } else {
             Snackbar.make(
                 binding.root,
