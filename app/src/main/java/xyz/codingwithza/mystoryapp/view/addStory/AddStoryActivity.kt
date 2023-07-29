@@ -3,11 +3,13 @@ package xyz.codingwithza.mystoryapp.view.addStory
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import xyz.codingwithza.mystoryapp.R
@@ -47,6 +49,9 @@ class AddStoryActivity : AppCompatActivity() {
         binding.btnAddGallery.setOnClickListener {
             openIntentGallery()
         }
+        binding.btnAddCamera.setOnClickListener {
+            openIntentCamera()
+        }
     }
 
     private fun openIntentGallery() {
@@ -66,6 +71,20 @@ class AddStoryActivity : AppCompatActivity() {
                 val myFile = uriToFile(uri, this@AddStoryActivity)
                 binding.ivAddPreview.setImageURI(uri)
             }
+        }
+    }
+
+    private fun openIntentCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        launcherIntentCamera.launch(intent)
+    }
+
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK) {
+            val imageBitmap = it.data?.extras?.get("data") as Bitmap
+            binding.ivAddPreview.setImageBitmap(imageBitmap)
         }
     }
 
