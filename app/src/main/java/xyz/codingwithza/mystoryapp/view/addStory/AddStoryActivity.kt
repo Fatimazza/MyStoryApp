@@ -103,7 +103,7 @@ class AddStoryActivity : AppCompatActivity() {
                                 is Result.Success -> {
                                     Snackbar.make(
                                         binding.root,
-                                        getString(R.string.add_story_success) + result.data,
+                                        result.data,
                                         Snackbar.LENGTH_SHORT
                                     ).show()
                                     showLoading(false)
@@ -206,13 +206,13 @@ class AddStoryActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         binding.apply {
             if (isLoading) {
-                btnAddGallery.isEnabled = false
-                btnAddCamera.isEnabled = false
+                btnAddGallery.visibility = View.GONE
+                btnAddCamera.visibility = View.GONE
                 btnAddStory.visibility = View.GONE
                 pbAddStory.visibility = View.VISIBLE
             } else {
-                btnAddGallery.isEnabled= false
-                btnAddCamera.isEnabled = false
+                btnAddGallery.visibility = View.VISIBLE
+                btnAddCamera.visibility = View.VISIBLE
                 btnAddStory.visibility = View.VISIBLE
                 pbAddStory.visibility = View.GONE
             }
