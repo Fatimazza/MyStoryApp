@@ -4,9 +4,7 @@ package xyz.codingwithza.mystoryapp.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -26,7 +24,7 @@ class StoryRepository private constructor(
 ) {
 
     private val storyResult = MediatorLiveData<Result<StoryResponse>>()
-    private val addstoryResult = MediatorLiveData<Result<AddStoryResponse>>()
+    private val addStoryResult = MediatorLiveData<Result<AddStoryResponse>>()
 
     fun getUserData(): LiveData<UserModel> {
         return pref.getUser().asLiveData()
@@ -69,21 +67,31 @@ class StoryRepository private constructor(
                     imageMultipart: MultipartBody.Part,
                     description: RequestBody
     ) : LiveData<Result<AddStoryResponse>> {
-        addstoryResult.value = Result.Loading
+        addStoryResult.value = Result.Loading
         val client = apiService.uploadImage("Bearer $token", imageMultipart, description)
         client.enqueue(object : Callback<AddStoryResponse> {
             override fun onResponse(
                 call: Call<AddStoryResponse>,
                 response: Response<AddStoryResponse>
             ) {
-                TODO("Not yet implemented")
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        addStoryResult.value = Result.Success(it)
+                    }
+                } else {
+                    val errorBody = Gson().fromJson(
+                        response.errorBody()?.charStream(),
+                        ErrorResponse::class.java
+                    )
+                    addStoryResult.value = Result.Error(errorBody.message.toString())
+                }
             }
 
             override fun onFailure(call: Call<AddStoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                addStoryResult.value = Result.Error(t.message.toString())
             }
         })
-        return addstoryResult
+        return addStoryResult
     }
 
     companion object {
