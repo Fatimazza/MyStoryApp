@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import xyz.codingwithza.mystoryapp.data.repository.AuthRepository
 import xyz.codingwithza.mystoryapp.data.repository.StoryRepository
 import xyz.codingwithza.mystoryapp.di.Injection
+import xyz.codingwithza.mystoryapp.view.addStory.AddStoryViewModel
 import xyz.codingwithza.mystoryapp.view.login.LoginViewModel
 import xyz.codingwithza.mystoryapp.view.main.MainViewModel
 import xyz.codingwithza.mystoryapp.view.register.RegisterViewModel
@@ -30,6 +31,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
                 StoryViewModel(storyRepository) as T
+            }
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel(storyRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
