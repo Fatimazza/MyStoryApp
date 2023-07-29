@@ -7,6 +7,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +16,7 @@ import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.local.datastore.UserPreferences
 import xyz.codingwithza.mystoryapp.data.remote.Result
+import xyz.codingwithza.mystoryapp.data.remote.response.AddStoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.ErrorResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
@@ -23,6 +26,7 @@ class StoryRepository private constructor(
 ) {
 
     private val storyResult = MediatorLiveData<Result<StoryResponse>>()
+    private val addstoryResult = MediatorLiveData<Result<AddStoryResponse>>()
 
     fun getUserData(): LiveData<UserModel> {
         return pref.getUser().asLiveData()
@@ -59,6 +63,15 @@ class StoryRepository private constructor(
                 }
             })
         return storyResult
+    }
+
+    fun uploadStory(token: String,
+                    imageMultipart: MultipartBody.Part,
+                    description: RequestBody
+    ) : LiveData<Result<AddStoryResponse>> {
+        addstoryResult.value = Result.Loading
+        
+        return addstoryResult
     }
 
     companion object {
