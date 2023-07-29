@@ -1,4 +1,4 @@
-package xyz.codingwithza.mystoryapp.data.local
+package xyz.codingwithza.mystoryapp.data.remote.response
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
