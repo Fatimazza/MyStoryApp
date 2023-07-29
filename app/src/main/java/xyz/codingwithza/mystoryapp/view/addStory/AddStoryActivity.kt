@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.databinding.ActivityAddStoryBinding
 import xyz.codingwithza.mystoryapp.util.createCustomTempFile
@@ -75,7 +80,16 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun addStory() {
         if (getFile != null) {
-
+            val file = getFile as File
+            val description =
+                binding.etAddStoryDesc.text.toString().toRequestBody("text/plain".toMediaType())
+            val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "photo",
+                file.name,
+                requestImageFile
+            )
+            
         } else {
             Snackbar.make(
                 binding.root,
