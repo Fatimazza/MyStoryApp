@@ -4,10 +4,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import xyz.codingwithza.mystoryapp.data.local.StoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.AddStoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.LoginResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.RegisterResponse
+import xyz.codingwithza.mystoryapp.data.remote.response.StoryResponse
 
 interface ApiService {
 

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.view.main.MainActivity
 import xyz.codingwithza.mystoryapp.R
-import xyz.codingwithza.mystoryapp.data.local.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.Result
+import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.addStory.AddStoryActivity
