@@ -23,7 +23,7 @@
             android:backgroundTint="@color/black"
             android:elevation="2dp"
             android:scaleType="fitCenter"
-            android:text="@string/story_camera_x"
+            android:text="@string/story_camera"
             app:layout_constraintBottom_toTopOf="@+id/btnAddStory"
             app:layout_constraintEnd_toStartOf="@+id/glAddVertical"
             app:layout_constraintStart_toStartOf="parent" />

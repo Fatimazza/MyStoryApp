@@ -20,7 +20,7 @@
     <string name="button_no">No</string>
     <string name="auth_logout_warning">Are you sure want to Log out?</string>
     <string name="story_description">Let\'s explore Story app!</string>
-    <string name="story_camera_x">Camera X</string>
+    <string name="story_camera">Camera</string>
     <string name="story_gallery">Gallery</string>
     <string name="story_add">Add Story</string>
     <string name="story_desc">Description</string>
