@@ -31,6 +31,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<StoryResponse>
 
+    @GET("stories")
+    fun getAllStoryByLocation(
+        @Header("Authorization") token: String,
+        @Query("location") location : Int = 1,
+    ) : Call<StoryResponse>
+
     @Multipart
     @POST("stories")
     fun uploadImage(
