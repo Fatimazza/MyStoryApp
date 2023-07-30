@@ -1,8 +1,8 @@
 package xyz.codingwithza.mystoryapp.view.map
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,12 +11,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
+import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var mapsViewModel: MapsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+        mapsViewModel = ViewModelProvider(this, factory)[MapsViewModel::class.java]
     }
 
     /**
