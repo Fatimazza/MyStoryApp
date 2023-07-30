@@ -10,6 +10,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
@@ -61,6 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun showAllStoriesByLocation() {
+        val boundsBuilder = LatLngBounds.Builder()
         mapsViewModel.getUserData().observe(this) { user ->
             mapsViewModel.getAllStoriesByLocation(user.token).observe(this) { result ->
                 if (result != null) {
@@ -79,6 +81,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         .snippet(story.description)
                                 )
                                 pin?.tag = story.photoUrl
+
+                                boundsBuilder.include(latLng)
+                                val bounds: LatLngBounds = boundsBuilder.build()
+                                mMap.animateCamera(
+                                    CameraUpdateFactory.newLatLngBounds(
+                                        bounds,
+                                        resources.displayMetrics.widthPixels,
+                                        resources.displayMetrics.heightPixels,
+                                        150
+                                    )
+                                )
                             }
                         }
                         is Result.Error -> {
