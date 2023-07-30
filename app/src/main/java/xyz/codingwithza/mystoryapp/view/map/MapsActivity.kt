@@ -26,6 +26,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var mapsViewModel: MapsViewModel
 
+    companion object {
+        private const val DEFAULT_LAT = -6.2088
+        private const val DEFAULT_LNG = 106.8456
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,7 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         addMapsControl()
-        addDefaultMarker()
+        zoomToDefaultLocation()
         showAllStoriesByLocation()
     }
 
@@ -114,9 +119,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
     }
 
-    private fun addDefaultMarker() {
-        val jakarta = LatLng( -6.2088, 106.8456)
-        mMap.addMarker(MarkerOptions().position(jakarta).title(getString(R.string.maps_default_marker)))
+    private fun zoomToDefaultLocation() {
+        val jakarta = LatLng(DEFAULT_LAT, DEFAULT_LNG)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 10f))
     }
 
