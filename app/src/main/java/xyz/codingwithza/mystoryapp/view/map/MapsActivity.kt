@@ -11,8 +11,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
+import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
@@ -66,8 +68,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         is Result.Loading -> {
                         }
                         is Result.Success -> {
+                            val stories = result.data.listStory
+                            stories?.forEach { userStory ->
+                                val story = userStory as ListStoryItem
+                                val latLng = LatLng(story.lat as Double, story.lon as Double)
+                                val pin = mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(latLng)
+                                        .title(story.name)
+                                        .snippet(story.description)
+                                )
+                                pin?.tag = story.photoUrl
+                            }
                         }
                         is Result.Error -> {
+                            Snackbar.make(
+                                binding.root,
+                                getString(R.string.load_error) + result.error,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
