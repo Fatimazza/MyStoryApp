@@ -66,7 +66,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun addDefaultMarker() {
         val jakarta = LatLng( -6.2088, 106.8456)
         mMap.addMarker(MarkerOptions().position(jakarta).title(getString(R.string.maps_default_marker)))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(jakarta))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 10f))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
