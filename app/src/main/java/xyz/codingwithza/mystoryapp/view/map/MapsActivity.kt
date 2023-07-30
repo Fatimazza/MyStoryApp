@@ -1,6 +1,8 @@
 package xyz.codingwithza.mystoryapp.view.map
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -65,5 +67,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val jakarta = LatLng( -6.2088, 106.8456)
         mMap.addMarker(MarkerOptions().position(jakarta).title(getString(R.string.maps_default_marker)))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(jakarta))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_maps, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.normal_type -> {
+                mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+                true
+            }
+            R.id.satellite_type -> {
+                mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                true
+            }
+            R.id.terrain_type -> {
+                mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                true
+            }
+            R.id.hybrid_type -> {
+                mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 }
