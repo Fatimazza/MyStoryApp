@@ -78,7 +78,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             val stories = result.data.listStory
                             stories?.forEach { userStory ->
                                 val story = userStory as ListStoryItem
-                                val latLng = LatLng(story.lat as Double, story.lon as Double)
+                                var latLng = LatLng(DEFAULT_LAT, DEFAULT_LNG)
+                                if (story.lat != null && story.lon != null) {
+                                    latLng = LatLng(story.lat, story.lon)
+                                }
                                 val pin = mMap.addMarker(
                                     MarkerOptions()
                                         .position(latLng)
