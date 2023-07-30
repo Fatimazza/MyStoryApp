@@ -51,11 +51,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         addMapsControl()
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        addDefaultMarker()
     }
 
     private fun addMapsControl() {
@@ -63,5 +59,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
+    }
+
+    private fun addDefaultMarker() {
+        val jakarta = LatLng( -6.2088, 106.8456)
+        mMap.addMarker(MarkerOptions().position(jakarta).title(getString(R.string.maps_default_marker)))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(jakarta))
     }
 }
