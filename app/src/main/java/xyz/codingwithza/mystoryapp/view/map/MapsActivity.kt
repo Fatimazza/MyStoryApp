@@ -1,26 +1,31 @@
 package xyz.codingwithza.mystoryapp.view.map
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
+import xyz.codingwithza.mystoryapp.databinding.DialogStoryMapBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -61,6 +66,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMarkerClickListener(this)
         addMapsControl()
         zoomToDefaultLocation()
         showAllStoriesByLocation()
@@ -154,5 +160,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val dialogMap : DialogStoryMapBinding = DialogStoryMapBinding.inflate(layoutInflater)
+        val dialog = Dialog(this@MapsActivity)
+        dialog.setContentView(dialogMap.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialogMap.apply {
+            btnMapsExit.setOnClickListener {
+                dialog.dismiss()
+            }
+            tvMapsName.text = marker.title.toString()
+            tvMapsDesc.text = marker.snippet.toString()
+            Glide
+                .with(this@MapsActivity)
+                .load(marker.tag.toString())
+                .into(ivMapsImage)
+        }
+        dialog.setCancelable(true)
+        dialog.show()
+        return false
     }
 }
