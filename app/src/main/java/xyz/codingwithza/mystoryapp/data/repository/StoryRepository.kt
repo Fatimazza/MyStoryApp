@@ -72,11 +72,21 @@ class StoryRepository private constructor(
                     call: Call<StoryResponse>,
                     response: Response<StoryResponse>
                 ) {
-                    TODO("Not yet implemented")
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            storyResult.value = Result.Success(it)
+                        }
+                    } else {
+                        val errorBody = Gson().fromJson(
+                            response.errorBody()?.charStream(),
+                            ErrorResponse::class.java
+                        )
+                        storyResult.value = Result.Error(errorBody.message.toString())
+                    }
                 }
 
                 override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    storyResult.value = Result.Error(t.message.toString())
                 }
             })
         return storyResult
