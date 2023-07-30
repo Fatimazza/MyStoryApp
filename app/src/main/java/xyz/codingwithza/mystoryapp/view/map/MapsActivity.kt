@@ -12,6 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import xyz.codingwithza.mystoryapp.R
+import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
@@ -54,6 +55,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
         addMapsControl()
         addDefaultMarker()
+        showAllStoriesByLocation()
+    }
+
+    private fun showAllStoriesByLocation() {
+        mapsViewModel.getUserData().observe(this) { user ->
+            mapsViewModel.getAllStoriesByLocation(user.token).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                        }
+                        is Result.Success -> {
+                        }
+                        is Result.Error -> {
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun addMapsControl() {
