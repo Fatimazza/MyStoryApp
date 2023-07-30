@@ -18,6 +18,7 @@ import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 import xyz.codingwithza.mystoryapp.view.addStory.AddStoryActivity
+import xyz.codingwithza.mystoryapp.view.map.MapsActivity
 import xyz.codingwithza.mystoryapp.view.storydetail.StoryDetailActivity
 
 
@@ -140,11 +141,7 @@ class StoryActivity : AppCompatActivity() {
                 }
             }
             R.id.action_map -> {
-                Snackbar.make(
-                    binding.root,
-                    "Map Menu",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                startActivity(Intent(this@StoryActivity, MapsActivity::class.java))
             }
         }
     }
