@@ -30,4 +30,5 @@
     <string name="story_add_error">"Error adding story: "</string>
     <string name="add_story_success">"Add story "</string>
     <string name="menu_maps">Maps</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
