@@ -63,6 +63,25 @@ class StoryRepository private constructor(
         return storyResult
     }
 
+    fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> {
+        storyResult.value = Result.Loading
+        val client = apiService.getAllStoryByLocation("Bearer $token", 1)
+        client
+            .enqueue(object : Callback<StoryResponse>{
+                override fun onResponse(
+                    call: Call<StoryResponse>,
+                    response: Response<StoryResponse>
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        return storyResult
+    }
+
     fun uploadStory(token: String,
                     imageMultipart: MultipartBody.Part,
                     description: RequestBody) : MediatorLiveData<Result<String>> {
