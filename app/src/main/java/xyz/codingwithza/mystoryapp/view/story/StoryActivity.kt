@@ -139,6 +139,13 @@ class StoryActivity : AppCompatActivity() {
                     show()
                 }
             }
+            R.id.action_map -> {
+                Snackbar.make(
+                    binding.root,
+                    "Map Menu",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

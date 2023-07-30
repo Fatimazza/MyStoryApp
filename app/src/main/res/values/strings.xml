@@ -29,4 +29,5 @@
     <string name="story_choose_gallery">Choose a Picture</string>
     <string name="story_add_error">"Error adding story: "</string>
     <string name="add_story_success">"Add story "</string>
+    <string name="menu_maps">Maps</string>
 </resources>
