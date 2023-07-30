@@ -9,6 +9,7 @@ import xyz.codingwithza.mystoryapp.di.Injection
 import xyz.codingwithza.mystoryapp.view.addStory.AddStoryViewModel
 import xyz.codingwithza.mystoryapp.view.login.LoginViewModel
 import xyz.codingwithza.mystoryapp.view.main.MainViewModel
+import xyz.codingwithza.mystoryapp.view.map.MapsViewModel
 import xyz.codingwithza.mystoryapp.view.register.RegisterViewModel
 import xyz.codingwithza.mystoryapp.view.story.StoryViewModel
 
@@ -34,6 +35,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(storyRepository) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
