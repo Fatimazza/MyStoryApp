@@ -5,17 +5,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.google.gson.Gson
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import xyz.codingwithza.mystoryapp.data.StoryPagingSource
 import xyz.codingwithza.mystoryapp.data.local.datastore.UserModel
 import xyz.codingwithza.mystoryapp.data.local.datastore.UserPreferences
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.response.AddStoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.response.ErrorResponse
+import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.data.remote.response.StoryResponse
 import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
@@ -34,16 +40,16 @@ class StoryRepository private constructor(
         pref.logout()
     }
 
-    fun getAllStories(token: String): LiveData<Result<StoryResponse>> =
-        liveData {
-            emit(Result.Loading)
-            try {
-                val response = apiService.getAllStory("Bearer $token")
-                emit(Result.Success(response))
-            } catch (e: Exception) {
-                emit(Result.Error(e.message.toString()))
+    fun getAllStories(token: String): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, token)
             }
-        }
+        ).liveData
+    }
 
     fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> =
         liveData {

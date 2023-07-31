@@ -10,10 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.view.main.MainActivity
 import xyz.codingwithza.mystoryapp.R
-import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -61,27 +59,7 @@ class StoryActivity : AppCompatActivity() {
     private fun showAllStories() {
         storyViewModel.getUserData().observe(this) { user ->
             storyViewModel.getAllStories(user.token).observe(this) { result ->
-                if (result != null) {
-                    when (result) {
-                        is Result.Loading -> {
-                            showLoading(true)
-                        }
-                        is Result.Success -> {
-                            storyAdapter.setData(result.data.listStory)
-                            showLoading(false)
-                            binding.swipeStoryLayout.isRefreshing = false
-                        }
-                        is Result.Error -> {
-                            showLoading(false)
-                            binding.swipeStoryLayout.isRefreshing = false
-                            Snackbar.make(
-                                binding.root,
-                                getString(R.string.load_error) + result.error,
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                }
+                storyAdapter.submitData(lifecycle, result)
             }
         }
     }
