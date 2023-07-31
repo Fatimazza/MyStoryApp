@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -83,11 +82,6 @@ class LoginActivity : AppCompatActivity(), ViewUtil {
                 when (result) {
                     is Result.Loading -> {
                         showLoading(true)
-                        Toast.makeText(
-                            this,
-                            "~ Loading ~",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                     is Result.Success -> {
                         showLoading(false)
