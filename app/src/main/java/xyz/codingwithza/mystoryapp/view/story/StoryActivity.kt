@@ -60,6 +60,7 @@ class StoryActivity : AppCompatActivity() {
         storyViewModel.getUserData().observe(this) {
             storyViewModel.getAllStories().observe(this) { result ->
                 storyAdapter.submitData(lifecycle, result)
+                binding.swipeStoryLayout.isRefreshing = false
             }
         }
     }
