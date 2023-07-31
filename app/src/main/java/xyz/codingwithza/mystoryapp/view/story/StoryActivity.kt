@@ -58,7 +58,7 @@ class StoryActivity : AppCompatActivity() {
 
     private fun showAllStories() {
         storyViewModel.getUserData().observe(this) { user ->
-            storyViewModel.getAllStories(user.token).observe(this) { result ->
+            storyViewModel.getAllStories().observe(this) { result ->
                 storyAdapter.submitData(lifecycle, result)
             }
         }

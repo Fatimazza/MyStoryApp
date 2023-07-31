@@ -40,13 +40,13 @@ class StoryRepository private constructor(
         pref.logout()
     }
 
-    fun getAllStories(token: String): LiveData<PagingData<ListStoryItem>> {
+    fun getAllStories(): LiveData<PagingData<ListStoryItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
             pagingSourceFactory = {
-                StoryPagingSource(apiService, token)
+                StoryPagingSource(apiService)
             }
         ).liveData
     }

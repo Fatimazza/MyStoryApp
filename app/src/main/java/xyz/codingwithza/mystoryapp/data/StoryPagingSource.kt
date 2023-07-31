@@ -7,7 +7,6 @@ import xyz.codingwithza.mystoryapp.data.remote.retrofit.ApiService
 
 class StoryPagingSource(
     private val apiService: ApiService,
-    private val token: String
 ) : PagingSource<Int, ListStoryItem>() {
 
     private companion object {
@@ -17,7 +16,7 @@ class StoryPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListStoryItem> {
         return try {
             val position = params.key ?: INITIAL_PAGE_INDEX
-            val responseData = apiService.getAllStory("Bearer $token", position, params.loadSize)
+            val responseData = apiService.getAllStory(position, params.loadSize)
             LoadResult.Page(
                 data = responseData.listStory,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,

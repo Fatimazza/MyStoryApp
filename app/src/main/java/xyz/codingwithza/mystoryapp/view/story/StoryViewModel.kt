@@ -14,8 +14,8 @@ class StoryViewModel(
     private val storyRepository: StoryRepository
 ) : ViewModel() {
 
-    fun getAllStories(token: String): LiveData<PagingData<ListStoryItem>> =
-        storyRepository.getAllStories(token).cachedIn(viewModelScope)
+    fun getAllStories(): LiveData<PagingData<ListStoryItem>> =
+        storyRepository.getAllStories().cachedIn(viewModelScope)
 
     fun getUserData(): LiveData<UserModel> {
         return storyRepository.getUserData()
