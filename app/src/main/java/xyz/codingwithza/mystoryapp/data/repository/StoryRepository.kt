@@ -51,11 +51,11 @@ class StoryRepository private constructor(
         ).liveData
     }
 
-    fun getAllStoriesByLocation(): LiveData<Result<StoryResponse>> =
+    fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> =
         liveData {
             emit(Result.Loading)
             try {
-                val response = apiService.getAllStoryByLocation(1)
+                val response = apiService.getAllStoryByLocation("Bearer $token", 1)
                 emit(Result.Success(response))
             } catch (e: Exception) {
                 emit(Result.Error(e.message.toString()))

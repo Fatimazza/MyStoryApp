@@ -9,8 +9,8 @@ class MapsViewModel(
     private val storyRepository: StoryRepository
 ) : ViewModel() {
 
-    fun getAllStoriesByLocation() =
-        storyRepository.getAllStoriesByLocation()
+    fun getAllStoriesByLocation(token: String) =
+        storyRepository.getAllStoriesByLocation(token)
 
     fun getUserData(): LiveData<UserModel> {
         return storyRepository.getUserData()

@@ -73,8 +73,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun showAllStoriesByLocation() {
         val boundsBuilder = LatLngBounds.Builder()
-        mapsViewModel.getUserData().observe(this) {
-            mapsViewModel.getAllStoriesByLocation().observe(this) { result ->
+        mapsViewModel.getUserData().observe(this) { user ->
+            mapsViewModel.getAllStoriesByLocation(user.token).observe(this) { result ->
                 if (result != null) {
                     when (result) {
                         is Result.Loading -> {
