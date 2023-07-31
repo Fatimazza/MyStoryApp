@@ -62,11 +62,10 @@ class StoryRepository private constructor(
             }
         }
 
-    fun uploadStory(token: String,
-                    imageMultipart: MultipartBody.Part,
+    fun uploadStory(imageMultipart: MultipartBody.Part,
                     description: RequestBody) : MediatorLiveData<Result<String>> {
         addStoryResult.value = Result.Loading
-        val client = apiService.uploadImage("Bearer $token", imageMultipart, description)
+        val client = apiService.uploadImage(imageMultipart, description)
         client.enqueue(object : Callback<AddStoryResponse> {
             override fun onResponse(
                 call: Call<AddStoryResponse>,
