@@ -57,8 +57,8 @@ class StoryActivity : AppCompatActivity() {
     }
 
     private fun showAllStories() {
-        storyViewModel.getUserData().observe(this) {
-            storyViewModel.getAllStories().observe(this) { result ->
+        storyViewModel.getUserData().observe(this) { user ->
+            storyViewModel.getAllStories(user.token).observe(this) { result ->
                 storyAdapter.submitData(lifecycle, result)
                 binding.swipeStoryLayout.isRefreshing = false
             }
