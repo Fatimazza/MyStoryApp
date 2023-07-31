@@ -27,9 +27,9 @@ interface ApiService {
     ): Call<LoginResponse>
 
     @GET("stories")
-    fun getAllStory(
+    suspend fun getAllStory(
         @Header("Authorization") token: String
-    ): Call<StoryResponse>
+    ): StoryResponse
 
     @GET("stories")
     fun getAllStoryByLocation(

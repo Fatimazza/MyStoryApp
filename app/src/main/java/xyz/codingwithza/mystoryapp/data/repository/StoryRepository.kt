@@ -4,6 +4,7 @@ package xyz.codingwithza.mystoryapp.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,34 +35,16 @@ class StoryRepository private constructor(
         pref.logout()
     }
 
-    fun getAllStories(token: String): LiveData<Result<StoryResponse>> {
-        storyResult.value = Result.Loading
-        val client = apiService.getAllStory("Bearer $token")
-        client
-            .enqueue(object : Callback<StoryResponse> {
-                override fun onResponse(
-                    call: Call<StoryResponse>,
-                    response: Response<StoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            storyResult.value = Result.Success(it)
-                        }
-                    } else {
-                        val errorBody = Gson().fromJson(
-                            response.errorBody()?.charStream(),
-                            ErrorResponse::class.java
-                        )
-                        storyResult.value = Result.Error(errorBody.message.toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                    storyResult.value = Result.Error(t.message.toString())
-                }
-            })
-        return storyResult
-    }
+    fun getAllStories(token: String): LiveData<Result<StoryResponse>> =
+        liveData {
+            emit(Result.Loading)
+            try {
+                val response = apiService.getAllStory("Bearer $token")
+                emit(Result.Success(response))
+            } catch (e: Exception) {
+                emit(Result.Error(e.message.toString()))
+            }
+        }
 
     fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> {
         storyResult.value = Result.Loading
