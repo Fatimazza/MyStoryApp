@@ -67,7 +67,7 @@ class StoryActivity : AppCompatActivity() {
                             showLoading(true)
                         }
                         is Result.Success -> {
-                            storyAdapter.setData(result.data.listStory as List<ListStoryItem>)
+                            storyAdapter.setData(result.data.listStory)
                             showLoading(false)
                             binding.swipeStoryLayout.isRefreshing = false
                         }

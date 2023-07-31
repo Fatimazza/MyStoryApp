@@ -16,7 +16,20 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     inner class StoryViewHolder(val binding: ItemStoryBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(stories: ListStoryItem) {
+                binding.apply {
+                    tvStoryName.text = stories.name
+                    tvStoryDesc.text = stories.description
+
+                    Glide.with(itemView.context)
+                        .load(stories.photoUrl)
+                        .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_image_search_24))
+                        .error(R.drawable.ic_baseline_broken_image_24)
+                        .into(ivStoryPhoto)
+                }
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,19 +37,11 @@ class StoryAdapter() : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        val stories = storyList[position]
-        holder.apply {
-            binding.apply {
-                tvStoryName.text = stories.name
-                tvStoryDesc.text = stories.description
-
-                Glide.with(itemView.context)
-                    .load(stories.photoUrl)
-                    .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_image_search_24))
-                    .error(R.drawable.ic_baseline_broken_image_24)
-                    .into(ivStoryPhoto)
-            }
-            itemView.setOnClickListener {
+        val data = storyList[position]
+        if (data != null) {
+            storyList.addAll(listOf(data))
+            holder.bind(data)
+            holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(storyList[holder.bindingAdapterPosition])
             }
         }
