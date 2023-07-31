@@ -11,8 +11,8 @@ class AddStoryViewModel(
     private val storyRepository: StoryRepository
 ) : ViewModel() {
 
-    fun uploadStory(imageMultipart: MultipartBody.Part, description: RequestBody) =
-        storyRepository.uploadStory(imageMultipart, description)
+    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, description: RequestBody) =
+        storyRepository.uploadStory(token, imageMultipart, description)
 
     fun getUserData(): LiveData<UserModel> {
         return storyRepository.getUserData()

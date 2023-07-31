@@ -93,8 +93,8 @@ class AddStoryActivity : AppCompatActivity() {
                 file.name,
                 requestImageFile
             )
-            addStoryViewModel.getUserData().observe(this) {
-                addStoryViewModel.uploadStory(imageMultipart, description)
+            addStoryViewModel.getUserData().observe(this) { user ->
+                addStoryViewModel.uploadStory(user.token, imageMultipart, description)
                     .observe(this) { result ->
                         if (result != null) {
                             when (result) {
