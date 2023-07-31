@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Environment
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,4 +68,10 @@ fun reduceFileImage(file: File): File {
     } while (streamLength > MAXIMAL_SIZE)
     bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
     return file
+}
+
+fun ImageView.loadImage(url: String?) {
+    Glide.with(this.context)
+        .load(url)
+        .into(this)
 }

@@ -2,9 +2,9 @@ package xyz.codingwithza.mystoryapp.view.storydetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bumptech.glide.Glide
 import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityStoryDetailBinding
+import xyz.codingwithza.mystoryapp.util.loadImage
 
 class StoryDetailActivity : AppCompatActivity() {
 
@@ -33,10 +33,7 @@ class StoryDetailActivity : AppCompatActivity() {
             binding.apply {
                 tvStoryName.text = story?.name
                 tvStoryDesc.text = story?.description
-
-                Glide.with(this@StoryDetailActivity)
-                    .load(story?.photoUrl)
-                    .into(ivDetailPhoto)
+                ivDetailPhoto.loadImage(story?.photoUrl)
             }
         }
     }

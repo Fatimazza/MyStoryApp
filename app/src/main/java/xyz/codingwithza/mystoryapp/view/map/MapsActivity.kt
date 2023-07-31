@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,6 +20,7 @@ import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
 import xyz.codingwithza.mystoryapp.databinding.DialogStoryMapBinding
+import xyz.codingwithza.mystoryapp.util.loadImage
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
 
 
@@ -170,10 +170,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
             tvMapsName.text = marker.title.toString()
             tvMapsDesc.text = marker.snippet.toString()
-            Glide
-                .with(this@MapsActivity)
-                .load(marker.tag.toString())
-                .into(ivMapsImage)
+            ivMapsImage.loadImage(marker.tag.toString())
         }
         dialog.setCancelable(true)
         dialog.show()
