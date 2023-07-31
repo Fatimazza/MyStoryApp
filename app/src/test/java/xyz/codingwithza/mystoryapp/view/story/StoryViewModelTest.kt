@@ -60,6 +60,26 @@ class StoryViewModelTest {
         Assert.assertEquals(dummyStory.size, differ.snapshot().size)
         Assert.assertEquals(dummyStory[0], differ.snapshot()[0])
     }
+
+    @Test
+    fun `when Get Story Empty Should Return No Data`() = runTest {
+        val data: PagingData<ListStoryItem> = PagingData.from(emptyList())
+        val expectedStory = MutableLiveData<PagingData<ListStoryItem>>()
+        expectedStory.value = data
+        Mockito.`when`(storyRepository.getAllStories()).thenReturn(expectedStory)
+
+        val storyViewModel = StoryViewModel(storyRepository)
+        val actualQuote: PagingData<ListStoryItem> = storyViewModel.getAllStories().getOrAwaitValue()
+
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            updateCallback = noopListUpdateCallback,
+            workerDispatcher = Dispatchers.Main,
+        )
+        differ.submitData(actualQuote)
+
+        Assert.assertEquals(0, differ.snapshot().size)
+    }
 }
 
 val noopListUpdateCallback = object : ListUpdateCallback {
