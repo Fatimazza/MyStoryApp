@@ -24,7 +24,6 @@ class StoryRepository private constructor(
     private val apiService: ApiService
 ) {
 
-    private val storyResult = MediatorLiveData<Result<StoryResponse>>()
     private val addStoryResult = MediatorLiveData<Result<String>>()
 
     fun getUserData(): LiveData<UserModel> {
@@ -46,34 +45,16 @@ class StoryRepository private constructor(
             }
         }
 
-    fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> {
-        storyResult.value = Result.Loading
-        val client = apiService.getAllStoryByLocation("Bearer $token", 1)
-        client
-            .enqueue(object : Callback<StoryResponse>{
-                override fun onResponse(
-                    call: Call<StoryResponse>,
-                    response: Response<StoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            storyResult.value = Result.Success(it)
-                        }
-                    } else {
-                        val errorBody = Gson().fromJson(
-                            response.errorBody()?.charStream(),
-                            ErrorResponse::class.java
-                        )
-                        storyResult.value = Result.Error(errorBody.message.toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                    storyResult.value = Result.Error(t.message.toString())
-                }
-            })
-        return storyResult
-    }
+    fun getAllStoriesByLocation(token: String): LiveData<Result<StoryResponse>> =
+        liveData {
+            emit(Result.Loading)
+            try {
+                val response = apiService.getAllStoryByLocation("Bearer $token", 1)
+                emit(Result.Success(response))
+            } catch (e: Exception) {
+                emit(Result.Error(e.message.toString()))
+            }
+        }
 
     fun uploadStory(token: String,
                     imageMultipart: MultipartBody.Part,
