@@ -19,7 +19,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import xyz.codingwithza.mystoryapp.R
 import xyz.codingwithza.mystoryapp.data.remote.Result
-import xyz.codingwithza.mystoryapp.data.remote.response.ListStoryItem
 import xyz.codingwithza.mystoryapp.databinding.ActivityMapsBinding
 import xyz.codingwithza.mystoryapp.databinding.DialogStoryMapBinding
 import xyz.codingwithza.mystoryapp.view.ViewModelFactory
@@ -82,12 +81,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                         }
                         is Result.Success -> {
                             val stories = result.data.listStory
-                            stories?.forEach { userStory ->
-                                val story = userStory as ListStoryItem
-                                var latLng = LatLng(DEFAULT_LAT, DEFAULT_LNG)
-                                if (story.lat != null && story.lon != null) {
-                                    latLng = LatLng(story.lat, story.lon)
-                                }
+                            stories.forEach { userStory ->
+                                val story = userStory
+                                val latLng = LatLng(story.lat, story.lon)
                                 val pin = mMap.addMarker(
                                     MarkerOptions()
                                         .position(latLng)
